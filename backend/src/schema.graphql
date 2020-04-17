@@ -6,11 +6,15 @@ type Mutation {
     dateTo: DateTime
     count: Int
     notes: String
-    breeding_code: String): Record!
+    location: LocationCreateInput
+    observer: UserCreateInput
+    breeding_code: String): Record!    
+
   addSpecies(
     name: String
     rarity: Int 
     resident: Boolean): Species!
+
   createUser(data: UserCreateInput!): User!
   createClass(data: ClassCreateInput!): Class!
   createLocation(data: LocationCreateInput!): Location!
