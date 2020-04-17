@@ -1,0 +1,38 @@
+type User {
+  id: ID! @id
+  name: String!
+  email: String
+}
+
+type Class {
+  id: ID! @id
+  name: String!
+}
+
+type Location {
+  id: ID! @id
+  site: String,
+  area: String
+}
+
+type Species {  
+  id: ID! @id  
+  name: String!
+  rarity: Int
+  resident: Boolean
+  class: Class
+}
+
+type Record {
+  id: ID! @id 
+  observer: User!
+  species: Species!
+  location: Location!
+  date: DateTime
+  dateTo: DateTime
+  count: Int
+  notes: String
+  breeding_code: String
+}
+
+

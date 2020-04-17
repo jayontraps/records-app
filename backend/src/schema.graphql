@@ -1,0 +1,25 @@
+# import * from './generated/prisma.graphql'
+
+type Mutation {  
+  createRecord( 
+    date: DateTime
+    dateTo: DateTime
+    count: Int
+    notes: String
+    breeding_code: String): Record!
+  addSpecies(
+    name: String
+    rarity: Int 
+    resident: Boolean): Species!
+  createUser(data: UserCreateInput!): User!
+  createClass(data: ClassCreateInput!): Class!
+  createLocation(data: LocationCreateInput!): Location!
+}
+
+type Query {
+  species(where: SpeciesWhereUniqueInput!): Species
+  allSpecies: [Species]!
+  specieses(where: SpeciesWhereInput): [Species]!
+  classes: [Class]!
+  locations(where: LocationWhereInput): [Location]!
+}
