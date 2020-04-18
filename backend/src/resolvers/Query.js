@@ -1,6 +1,7 @@
 const { forwardTo } = require('prisma-binding');
 
 const Query = {
+    records: forwardTo('db'),
     species: forwardTo('db'),
     classes: forwardTo('db'),
     specieses: forwardTo('db'),

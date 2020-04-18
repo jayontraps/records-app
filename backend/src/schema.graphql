@@ -21,6 +21,7 @@ type Mutation {
 }
 
 type Query {
+  records(where: RecordWhereInput): [Record]!
   species(where: SpeciesWhereUniqueInput!): Species
   allSpecies: [Species]!
   specieses(where: SpeciesWhereInput): [Species]!

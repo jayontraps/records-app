@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/mr-jason-o-righelato/sighting-app/dev
-# timestamp: Thu Apr 16 2020 20:50:33 GMT+0100 (British Summer Time)
+# timestamp: Sat Apr 18 2020 07:06:35 GMT+0100 (British Summer Time)
 
 type AggregateClass {
   count: Int!
@@ -578,6 +578,7 @@ type Query {
 
 type Record implements Node {
   id: ID!
+  status: SightingStatus!
   observer: User!
   species: Species!
   location: Location!
@@ -600,6 +601,7 @@ type RecordConnection {
 
 input RecordCreateInput {
   id: ID
+  status: SightingStatus!
   date: DateTime
   dateTo: DateTime
   count: Int
@@ -622,6 +624,8 @@ type RecordEdge {
 enum RecordOrderByInput {
   id_ASC
   id_DESC
+  status_ASC
+  status_DESC
   date_ASC
   date_DESC
   dateTo_ASC
@@ -636,6 +640,7 @@ enum RecordOrderByInput {
 
 type RecordPreviousValues {
   id: ID!
+  status: SightingStatus!
   date: DateTime
   dateTo: DateTime
   count: Int
@@ -683,6 +688,7 @@ input RecordSubscriptionWhereInput {
 }
 
 input RecordUpdateInput {
+  status: SightingStatus
   date: DateTime
   dateTo: DateTime
   count: Int
@@ -694,6 +700,7 @@ input RecordUpdateInput {
 }
 
 input RecordUpdateManyMutationInput {
+  status: SightingStatus
   date: DateTime
   dateTo: DateTime
   count: Int
@@ -750,6 +757,16 @@ input RecordWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
+  status: SightingStatus
+
+  """All values that are not equal to given value."""
+  status_not: SightingStatus
+
+  """All values that are contained in given list."""
+  status_in: [SightingStatus!]
+
+  """All values that are not contained in given list."""
+  status_not_in: [SightingStatus!]
   date: DateTime
 
   """All values that are not equal to given value."""
@@ -903,6 +920,13 @@ input RecordWhereInput {
 
 input RecordWhereUniqueInput {
   id: ID
+}
+
+enum SightingStatus {
+  DRAFT
+  PUBLISHED
+  REJECTED
+  DUPLICATE
 }
 
 type Species implements Node {

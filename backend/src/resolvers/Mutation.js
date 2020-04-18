@@ -50,6 +50,9 @@ const mutations = {
         }
       }
     })
+
+    // asign all new records to DRAFT status
+    const status = "DRAFT"
     
     const item = await ctx.db.mutation.createRecord({
       data: {
@@ -59,6 +62,7 @@ const mutations = {
           }
         },
         ...args,
+        status,
         location,
         observer
       }
