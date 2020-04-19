@@ -1,4 +1,11 @@
 .DS_Store
 node_modules/
 .env 
-yarn-error.log
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# next.js build output
+.next
