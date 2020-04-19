@@ -1,15 +1,12 @@
+import Link from 'next/link';
 import Nav from './Nav';
 
 const Header = () => (
   <div>
     <div className="bar">
-      <a href="">Sick Fits</a>
+      <Link href="/"><a>Reacords app</a></Link>
       <Nav />
-    </div>
-    <div className="sub-bar">
-      <p>Search</p>
-    </div>
-    <div>Cart</div>
+    </div>    
   </div>
 );
 
