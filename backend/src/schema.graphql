@@ -21,7 +21,7 @@ type Mutation {
 }
 
 type Query {
-  records(where: RecordWhereInput): [Record]!
+  records(where: RecordWhereInput, orderBy: RecordOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Record]!
   species(where: SpeciesWhereUniqueInput!): Species
   allSpecies: [Species]!
   specieses(where: SpeciesWhereInput): [Species]!
