@@ -1,9 +1,9 @@
-import Link from 'next/link';
+import { CreateRecord } from '../components'
 
-const Sell = props => (
+const Create = props => (
   <div>
-    <p>Create record</p>
+    <CreateRecord />
   </div>
 );
 
-export default Sell;
+export default Create;

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from "styled-components"
-import { format } from 'date-fns';
+// import { format } from 'date-fns';
 
 const StyledRecord = styled.div`
     background-color: gainsboro;
@@ -36,7 +36,7 @@ const Record = ({record}) => {
       <div>{observerrName}</div>
       <div>{status}</div>
       <div>{count}</div>
-      <div>{format(date,  'MMMM d, YYYY')}</div>
+      {/* <div>{format(date,  'MMMM d, YYYY')}</div> */}
       <div>{site}</div>
       <div>{notes}</div>
       <div>{breeding_code}</div>
