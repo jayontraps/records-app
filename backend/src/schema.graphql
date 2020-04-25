@@ -1,26 +1,23 @@
 # import * from './generated/prisma.graphql'
 
-type Mutation {  
-  createRecord( 
-    date: DateTime
-    dateTo: DateTime
-    count: Int
-    notes: String
-    location: LocationCreateInput
-    observer: UserCreateInput
-    breeding_code: String): Record!    
-
+type Mutation {     
   addSpecies(
     name: String
     rarity: Int 
-    resident: Boolean): Species!
-
+    status: [SpeciesCreateInput]
+    ): Species!
+  createRecord(data: RecordCreateInput!): Record!
+  createSpecies(data: SpeciesCreateInput!): Species!
   createUser(data: UserCreateInput!): User!
   createClass(data: ClassCreateInput!): Class!
   createLocation(data: LocationCreateInput!): Location!
+  createBreedingCode(data: BreedingCodeCreateInput!): BreedingCode!
+  createSpeciesStatus(data: SpeciesStatusCreateInput!): SpeciesStatus!
 }
 
 type Query {
+  breedingCodes(where: BreedingCodeWhereInput): [BreedingCode]!
+  users(where: UserWhereInput, orderBy: UserOrderByInput): [User]!
   records(where: RecordWhereInput, orderBy: RecordOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Record]!
   species(where: SpeciesWhereUniqueInput!): Species
   allSpecies: [Species]!

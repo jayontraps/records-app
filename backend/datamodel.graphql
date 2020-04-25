@@ -5,10 +5,24 @@ enum SightingStatus {
   DUPLICATE
 }
 
+type BreedingCode {
+  id: ID! @id
+  code: String!
+  group: String
+  description: String
+}
+
+type SpeciesStatus {
+  id: ID! @id
+  code: String!
+  description: String
+}
+
 type User {
   id: ID! @id
   name: String!
   email: String
+  records: [Record!]
 }
 
 type Class {
@@ -16,31 +30,42 @@ type Class {
   name: String!
 }
 
+type MasterSite {
+  id: ID! @id
+  name: String!
+}
+
 type Location {
   id: ID! @id
-  site: String,
+  site: String!,  
+  gridRef: String!
   area: String
+  masterSite: MasterSite 
 }
 
 type Species {  
   id: ID! @id  
   name: String!
+  class: Class!
   rarity: Int
-  resident: Boolean
-  class: Class
+  status: [SpeciesStatus!]
 }
 
 type Record {
   id: ID! @id 
   status: SightingStatus!
-  observer: User!
+  author: User!
+  legacyObserver: String
   species: Species!
   location: Location!
   date: DateTime
   dateTo: DateTime
+  startTime: String
+  endTime: String
   count: Int
   notes: String
-  breeding_code: String  
+  breeding_code: BreedingCode  
+  createdAt: DateTime! @createdAt
 }
 
 

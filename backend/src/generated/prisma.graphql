@@ -1,11 +1,19 @@
-# source: https://eu1.prisma.sh/mr-jason-o-righelato/sighting-app/dev
-# timestamp: Sat Apr 18 2020 07:06:35 GMT+0100 (British Summer Time)
+# source: https://eu1.prisma.sh/mr-jason-o-righelato/records-app/records
+# timestamp: Fri Apr 24 2020 15:43:49 GMT+0100 (British Summer Time)
+
+type AggregateBreedingCode {
+  count: Int!
+}
 
 type AggregateClass {
   count: Int!
 }
 
 type AggregateLocation {
+  count: Int!
+}
+
+type AggregateMasterSite {
   count: Int!
 }
 
@@ -17,6 +25,10 @@ type AggregateSpecies {
   count: Int!
 }
 
+type AggregateSpeciesStatus {
+  count: Int!
+}
+
 type AggregateUser {
   count: Int!
 }
@@ -24,6 +36,308 @@ type AggregateUser {
 type BatchPayload {
   """The number of nodes that have been affected by the Batch operation."""
   count: Long!
+}
+
+type BreedingCode implements Node {
+  id: ID!
+  code: String!
+  group: String
+  description: String
+}
+
+"""A connection to a list of items."""
+type BreedingCodeConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [BreedingCodeEdge]!
+  aggregate: AggregateBreedingCode!
+}
+
+input BreedingCodeCreateInput {
+  id: ID
+  code: String!
+  group: String
+  description: String
+}
+
+input BreedingCodeCreateOneInput {
+  create: BreedingCodeCreateInput
+  connect: BreedingCodeWhereUniqueInput
+}
+
+"""An edge in a connection."""
+type BreedingCodeEdge {
+  """The item at the end of the edge."""
+  node: BreedingCode!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum BreedingCodeOrderByInput {
+  id_ASC
+  id_DESC
+  code_ASC
+  code_DESC
+  group_ASC
+  group_DESC
+  description_ASC
+  description_DESC
+}
+
+type BreedingCodePreviousValues {
+  id: ID!
+  code: String!
+  group: String
+  description: String
+}
+
+type BreedingCodeSubscriptionPayload {
+  mutation: MutationType!
+  node: BreedingCode
+  updatedFields: [String!]
+  previousValues: BreedingCodePreviousValues
+}
+
+input BreedingCodeSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [BreedingCodeSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [BreedingCodeSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [BreedingCodeSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: BreedingCodeWhereInput
+}
+
+input BreedingCodeUpdateDataInput {
+  code: String
+  group: String
+  description: String
+}
+
+input BreedingCodeUpdateInput {
+  code: String
+  group: String
+  description: String
+}
+
+input BreedingCodeUpdateManyMutationInput {
+  code: String
+  group: String
+  description: String
+}
+
+input BreedingCodeUpdateOneInput {
+  create: BreedingCodeCreateInput
+  connect: BreedingCodeWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: BreedingCodeUpdateDataInput
+  upsert: BreedingCodeUpsertNestedInput
+}
+
+input BreedingCodeUpsertNestedInput {
+  update: BreedingCodeUpdateDataInput!
+  create: BreedingCodeCreateInput!
+}
+
+input BreedingCodeWhereInput {
+  """Logical AND on all given filters."""
+  AND: [BreedingCodeWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [BreedingCodeWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [BreedingCodeWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  code: String
+
+  """All values that are not equal to given value."""
+  code_not: String
+
+  """All values that are contained in given list."""
+  code_in: [String!]
+
+  """All values that are not contained in given list."""
+  code_not_in: [String!]
+
+  """All values less than the given value."""
+  code_lt: String
+
+  """All values less than or equal the given value."""
+  code_lte: String
+
+  """All values greater than the given value."""
+  code_gt: String
+
+  """All values greater than or equal the given value."""
+  code_gte: String
+
+  """All values containing the given string."""
+  code_contains: String
+
+  """All values not containing the given string."""
+  code_not_contains: String
+
+  """All values starting with the given string."""
+  code_starts_with: String
+
+  """All values not starting with the given string."""
+  code_not_starts_with: String
+
+  """All values ending with the given string."""
+  code_ends_with: String
+
+  """All values not ending with the given string."""
+  code_not_ends_with: String
+  group: String
+
+  """All values that are not equal to given value."""
+  group_not: String
+
+  """All values that are contained in given list."""
+  group_in: [String!]
+
+  """All values that are not contained in given list."""
+  group_not_in: [String!]
+
+  """All values less than the given value."""
+  group_lt: String
+
+  """All values less than or equal the given value."""
+  group_lte: String
+
+  """All values greater than the given value."""
+  group_gt: String
+
+  """All values greater than or equal the given value."""
+  group_gte: String
+
+  """All values containing the given string."""
+  group_contains: String
+
+  """All values not containing the given string."""
+  group_not_contains: String
+
+  """All values starting with the given string."""
+  group_starts_with: String
+
+  """All values not starting with the given string."""
+  group_not_starts_with: String
+
+  """All values ending with the given string."""
+  group_ends_with: String
+
+  """All values not ending with the given string."""
+  group_not_ends_with: String
+  description: String
+
+  """All values that are not equal to given value."""
+  description_not: String
+
+  """All values that are contained in given list."""
+  description_in: [String!]
+
+  """All values that are not contained in given list."""
+  description_not_in: [String!]
+
+  """All values less than the given value."""
+  description_lt: String
+
+  """All values less than or equal the given value."""
+  description_lte: String
+
+  """All values greater than the given value."""
+  description_gt: String
+
+  """All values greater than or equal the given value."""
+  description_gte: String
+
+  """All values containing the given string."""
+  description_contains: String
+
+  """All values not containing the given string."""
+  description_not_contains: String
+
+  """All values starting with the given string."""
+  description_starts_with: String
+
+  """All values not starting with the given string."""
+  description_not_starts_with: String
+
+  """All values ending with the given string."""
+  description_ends_with: String
+
+  """All values not ending with the given string."""
+  description_not_ends_with: String
+}
+
+input BreedingCodeWhereUniqueInput {
+  id: ID
 }
 
 type Class implements Node {
@@ -123,11 +437,9 @@ input ClassUpdateManyMutationInput {
   name: String
 }
 
-input ClassUpdateOneInput {
+input ClassUpdateOneRequiredInput {
   create: ClassCreateInput
   connect: ClassWhereUniqueInput
-  disconnect: Boolean
-  delete: Boolean
   update: ClassUpdateDataInput
   upsert: ClassUpsertNestedInput
 }
@@ -236,8 +548,10 @@ scalar DateTime
 
 type Location implements Node {
   id: ID!
-  site: String
+  site: String!
+  gridRef: String!
   area: String
+  masterSite: MasterSite
 }
 
 """A connection to a list of items."""
@@ -252,8 +566,10 @@ type LocationConnection {
 
 input LocationCreateInput {
   id: ID
-  site: String
+  site: String!
+  gridRef: String!
   area: String
+  masterSite: MasterSiteCreateOneInput
 }
 
 input LocationCreateOneInput {
@@ -275,13 +591,16 @@ enum LocationOrderByInput {
   id_DESC
   site_ASC
   site_DESC
+  gridRef_ASC
+  gridRef_DESC
   area_ASC
   area_DESC
 }
 
 type LocationPreviousValues {
   id: ID!
-  site: String
+  site: String!
+  gridRef: String!
   area: String
 }
 
@@ -326,16 +645,21 @@ input LocationSubscriptionWhereInput {
 
 input LocationUpdateDataInput {
   site: String
+  gridRef: String
   area: String
+  masterSite: MasterSiteUpdateOneInput
 }
 
 input LocationUpdateInput {
   site: String
+  gridRef: String
   area: String
+  masterSite: MasterSiteUpdateOneInput
 }
 
 input LocationUpdateManyMutationInput {
   site: String
+  gridRef: String
   area: String
 }
 
@@ -440,6 +764,46 @@ input LocationWhereInput {
 
   """All values not ending with the given string."""
   site_not_ends_with: String
+  gridRef: String
+
+  """All values that are not equal to given value."""
+  gridRef_not: String
+
+  """All values that are contained in given list."""
+  gridRef_in: [String!]
+
+  """All values that are not contained in given list."""
+  gridRef_not_in: [String!]
+
+  """All values less than the given value."""
+  gridRef_lt: String
+
+  """All values less than or equal the given value."""
+  gridRef_lte: String
+
+  """All values greater than the given value."""
+  gridRef_gt: String
+
+  """All values greater than or equal the given value."""
+  gridRef_gte: String
+
+  """All values containing the given string."""
+  gridRef_contains: String
+
+  """All values not containing the given string."""
+  gridRef_not_contains: String
+
+  """All values starting with the given string."""
+  gridRef_starts_with: String
+
+  """All values not starting with the given string."""
+  gridRef_not_starts_with: String
+
+  """All values ending with the given string."""
+  gridRef_ends_with: String
+
+  """All values not ending with the given string."""
+  gridRef_not_ends_with: String
   area: String
 
   """All values that are not equal to given value."""
@@ -480,6 +844,7 @@ input LocationWhereInput {
 
   """All values not ending with the given string."""
   area_not_ends_with: String
+  masterSite: MasterSiteWhereInput
 }
 
 input LocationWhereUniqueInput {
@@ -492,37 +857,261 @@ Long can represent values between -(2^63) and 2^63 - 1.
 """
 scalar Long
 
+type MasterSite implements Node {
+  id: ID!
+  name: String!
+}
+
+"""A connection to a list of items."""
+type MasterSiteConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [MasterSiteEdge]!
+  aggregate: AggregateMasterSite!
+}
+
+input MasterSiteCreateInput {
+  id: ID
+  name: String!
+}
+
+input MasterSiteCreateOneInput {
+  create: MasterSiteCreateInput
+  connect: MasterSiteWhereUniqueInput
+}
+
+"""An edge in a connection."""
+type MasterSiteEdge {
+  """The item at the end of the edge."""
+  node: MasterSite!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum MasterSiteOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+}
+
+type MasterSitePreviousValues {
+  id: ID!
+  name: String!
+}
+
+type MasterSiteSubscriptionPayload {
+  mutation: MutationType!
+  node: MasterSite
+  updatedFields: [String!]
+  previousValues: MasterSitePreviousValues
+}
+
+input MasterSiteSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [MasterSiteSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [MasterSiteSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [MasterSiteSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: MasterSiteWhereInput
+}
+
+input MasterSiteUpdateDataInput {
+  name: String
+}
+
+input MasterSiteUpdateInput {
+  name: String
+}
+
+input MasterSiteUpdateManyMutationInput {
+  name: String
+}
+
+input MasterSiteUpdateOneInput {
+  create: MasterSiteCreateInput
+  connect: MasterSiteWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: MasterSiteUpdateDataInput
+  upsert: MasterSiteUpsertNestedInput
+}
+
+input MasterSiteUpsertNestedInput {
+  update: MasterSiteUpdateDataInput!
+  create: MasterSiteCreateInput!
+}
+
+input MasterSiteWhereInput {
+  """Logical AND on all given filters."""
+  AND: [MasterSiteWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [MasterSiteWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [MasterSiteWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+}
+
+input MasterSiteWhereUniqueInput {
+  id: ID
+}
+
 type Mutation {
-  createRecord(data: RecordCreateInput!): Record!
-  createLocation(data: LocationCreateInput!): Location!
-  createClass(data: ClassCreateInput!): Class!
   createUser(data: UserCreateInput!): User!
+  createRecord(data: RecordCreateInput!): Record!
+  createSpeciesStatus(data: SpeciesStatusCreateInput!): SpeciesStatus!
+  createBreedingCode(data: BreedingCodeCreateInput!): BreedingCode!
+  createMasterSite(data: MasterSiteCreateInput!): MasterSite!
   createSpecies(data: SpeciesCreateInput!): Species!
-  updateRecord(data: RecordUpdateInput!, where: RecordWhereUniqueInput!): Record
-  updateLocation(data: LocationUpdateInput!, where: LocationWhereUniqueInput!): Location
-  updateClass(data: ClassUpdateInput!, where: ClassWhereUniqueInput!): Class
+  createClass(data: ClassCreateInput!): Class!
+  createLocation(data: LocationCreateInput!): Location!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateRecord(data: RecordUpdateInput!, where: RecordWhereUniqueInput!): Record
+  updateSpeciesStatus(data: SpeciesStatusUpdateInput!, where: SpeciesStatusWhereUniqueInput!): SpeciesStatus
+  updateBreedingCode(data: BreedingCodeUpdateInput!, where: BreedingCodeWhereUniqueInput!): BreedingCode
+  updateMasterSite(data: MasterSiteUpdateInput!, where: MasterSiteWhereUniqueInput!): MasterSite
   updateSpecies(data: SpeciesUpdateInput!, where: SpeciesWhereUniqueInput!): Species
-  deleteRecord(where: RecordWhereUniqueInput!): Record
-  deleteLocation(where: LocationWhereUniqueInput!): Location
-  deleteClass(where: ClassWhereUniqueInput!): Class
+  updateClass(data: ClassUpdateInput!, where: ClassWhereUniqueInput!): Class
+  updateLocation(data: LocationUpdateInput!, where: LocationWhereUniqueInput!): Location
   deleteUser(where: UserWhereUniqueInput!): User
+  deleteRecord(where: RecordWhereUniqueInput!): Record
+  deleteSpeciesStatus(where: SpeciesStatusWhereUniqueInput!): SpeciesStatus
+  deleteBreedingCode(where: BreedingCodeWhereUniqueInput!): BreedingCode
+  deleteMasterSite(where: MasterSiteWhereUniqueInput!): MasterSite
   deleteSpecies(where: SpeciesWhereUniqueInput!): Species
-  upsertRecord(where: RecordWhereUniqueInput!, create: RecordCreateInput!, update: RecordUpdateInput!): Record!
-  upsertLocation(where: LocationWhereUniqueInput!, create: LocationCreateInput!, update: LocationUpdateInput!): Location!
-  upsertClass(where: ClassWhereUniqueInput!, create: ClassCreateInput!, update: ClassUpdateInput!): Class!
+  deleteClass(where: ClassWhereUniqueInput!): Class
+  deleteLocation(where: LocationWhereUniqueInput!): Location
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  upsertRecord(where: RecordWhereUniqueInput!, create: RecordCreateInput!, update: RecordUpdateInput!): Record!
+  upsertSpeciesStatus(where: SpeciesStatusWhereUniqueInput!, create: SpeciesStatusCreateInput!, update: SpeciesStatusUpdateInput!): SpeciesStatus!
+  upsertBreedingCode(where: BreedingCodeWhereUniqueInput!, create: BreedingCodeCreateInput!, update: BreedingCodeUpdateInput!): BreedingCode!
+  upsertMasterSite(where: MasterSiteWhereUniqueInput!, create: MasterSiteCreateInput!, update: MasterSiteUpdateInput!): MasterSite!
   upsertSpecies(where: SpeciesWhereUniqueInput!, create: SpeciesCreateInput!, update: SpeciesUpdateInput!): Species!
-  updateManyRecords(data: RecordUpdateManyMutationInput!, where: RecordWhereInput): BatchPayload!
-  updateManyLocations(data: LocationUpdateManyMutationInput!, where: LocationWhereInput): BatchPayload!
-  updateManyClasses(data: ClassUpdateManyMutationInput!, where: ClassWhereInput): BatchPayload!
+  upsertClass(where: ClassWhereUniqueInput!, create: ClassCreateInput!, update: ClassUpdateInput!): Class!
+  upsertLocation(where: LocationWhereUniqueInput!, create: LocationCreateInput!, update: LocationUpdateInput!): Location!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  updateManyRecords(data: RecordUpdateManyMutationInput!, where: RecordWhereInput): BatchPayload!
+  updateManySpeciesStatuses(data: SpeciesStatusUpdateManyMutationInput!, where: SpeciesStatusWhereInput): BatchPayload!
+  updateManyBreedingCodes(data: BreedingCodeUpdateManyMutationInput!, where: BreedingCodeWhereInput): BatchPayload!
+  updateManyMasterSites(data: MasterSiteUpdateManyMutationInput!, where: MasterSiteWhereInput): BatchPayload!
   updateManySpecieses(data: SpeciesUpdateManyMutationInput!, where: SpeciesWhereInput): BatchPayload!
-  deleteManyRecords(where: RecordWhereInput): BatchPayload!
-  deleteManyLocations(where: LocationWhereInput): BatchPayload!
-  deleteManyClasses(where: ClassWhereInput): BatchPayload!
+  updateManyClasses(data: ClassUpdateManyMutationInput!, where: ClassWhereInput): BatchPayload!
+  updateManyLocations(data: LocationUpdateManyMutationInput!, where: LocationWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
+  deleteManyRecords(where: RecordWhereInput): BatchPayload!
+  deleteManySpeciesStatuses(where: SpeciesStatusWhereInput): BatchPayload!
+  deleteManyBreedingCodes(where: BreedingCodeWhereInput): BatchPayload!
+  deleteManyMasterSites(where: MasterSiteWhereInput): BatchPayload!
   deleteManySpecieses(where: SpeciesWhereInput): BatchPayload!
+  deleteManyClasses(where: ClassWhereInput): BatchPayload!
+  deleteManyLocations(where: LocationWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -553,21 +1142,30 @@ type PageInfo {
 }
 
 type Query {
-  records(where: RecordWhereInput, orderBy: RecordOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Record]!
-  locations(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Location]!
-  classes(where: ClassWhereInput, orderBy: ClassOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Class]!
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  records(where: RecordWhereInput, orderBy: RecordOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Record]!
+  speciesStatuses(where: SpeciesStatusWhereInput, orderBy: SpeciesStatusOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [SpeciesStatus]!
+  breedingCodes(where: BreedingCodeWhereInput, orderBy: BreedingCodeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [BreedingCode]!
+  masterSites(where: MasterSiteWhereInput, orderBy: MasterSiteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [MasterSite]!
   specieses(where: SpeciesWhereInput, orderBy: SpeciesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Species]!
-  record(where: RecordWhereUniqueInput!): Record
-  location(where: LocationWhereUniqueInput!): Location
-  class(where: ClassWhereUniqueInput!): Class
+  classes(where: ClassWhereInput, orderBy: ClassOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Class]!
+  locations(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Location]!
   user(where: UserWhereUniqueInput!): User
+  record(where: RecordWhereUniqueInput!): Record
+  speciesStatus(where: SpeciesStatusWhereUniqueInput!): SpeciesStatus
+  breedingCode(where: BreedingCodeWhereUniqueInput!): BreedingCode
+  masterSite(where: MasterSiteWhereUniqueInput!): MasterSite
   species(where: SpeciesWhereUniqueInput!): Species
-  recordsConnection(where: RecordWhereInput, orderBy: RecordOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): RecordConnection!
-  locationsConnection(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LocationConnection!
-  classesConnection(where: ClassWhereInput, orderBy: ClassOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ClassConnection!
+  class(where: ClassWhereUniqueInput!): Class
+  location(where: LocationWhereUniqueInput!): Location
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  recordsConnection(where: RecordWhereInput, orderBy: RecordOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): RecordConnection!
+  speciesStatusesConnection(where: SpeciesStatusWhereInput, orderBy: SpeciesStatusOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SpeciesStatusConnection!
+  breedingCodesConnection(where: BreedingCodeWhereInput, orderBy: BreedingCodeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BreedingCodeConnection!
+  masterSitesConnection(where: MasterSiteWhereInput, orderBy: MasterSiteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MasterSiteConnection!
   speciesesConnection(where: SpeciesWhereInput, orderBy: SpeciesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SpeciesConnection!
+  classesConnection(where: ClassWhereInput, orderBy: ClassOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ClassConnection!
+  locationsConnection(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LocationConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -579,14 +1177,18 @@ type Query {
 type Record implements Node {
   id: ID!
   status: SightingStatus!
-  observer: User!
+  author: User!
+  legacyObserver: String
   species: Species!
   location: Location!
   date: DateTime
   dateTo: DateTime
+  startTime: String
+  endTime: String
   count: Int
   notes: String
-  breeding_code: String
+  breeding_code: BreedingCode
+  createdAt: DateTime!
 }
 
 """A connection to a list of items."""
@@ -602,14 +1204,37 @@ type RecordConnection {
 input RecordCreateInput {
   id: ID
   status: SightingStatus!
+  legacyObserver: String
   date: DateTime
   dateTo: DateTime
+  startTime: String
+  endTime: String
   count: Int
   notes: String
-  breeding_code: String
-  observer: UserCreateOneInput!
+  author: UserCreateOneWithoutRecordsInput!
   species: SpeciesCreateOneInput!
   location: LocationCreateOneInput!
+  breeding_code: BreedingCodeCreateOneInput
+}
+
+input RecordCreateManyWithoutAuthorInput {
+  create: [RecordCreateWithoutAuthorInput!]
+  connect: [RecordWhereUniqueInput!]
+}
+
+input RecordCreateWithoutAuthorInput {
+  id: ID
+  status: SightingStatus!
+  legacyObserver: String
+  date: DateTime
+  dateTo: DateTime
+  startTime: String
+  endTime: String
+  count: Int
+  notes: String
+  species: SpeciesCreateOneInput!
+  location: LocationCreateOneInput!
+  breeding_code: BreedingCodeCreateOneInput
 }
 
 """An edge in a connection."""
@@ -626,97 +1251,46 @@ enum RecordOrderByInput {
   id_DESC
   status_ASC
   status_DESC
+  legacyObserver_ASC
+  legacyObserver_DESC
   date_ASC
   date_DESC
   dateTo_ASC
   dateTo_DESC
+  startTime_ASC
+  startTime_DESC
+  endTime_ASC
+  endTime_DESC
   count_ASC
   count_DESC
   notes_ASC
   notes_DESC
-  breeding_code_ASC
-  breeding_code_DESC
+  createdAt_ASC
+  createdAt_DESC
 }
 
 type RecordPreviousValues {
   id: ID!
   status: SightingStatus!
+  legacyObserver: String
   date: DateTime
   dateTo: DateTime
+  startTime: String
+  endTime: String
   count: Int
   notes: String
-  breeding_code: String
+  createdAt: DateTime!
 }
 
-type RecordSubscriptionPayload {
-  mutation: MutationType!
-  node: Record
-  updatedFields: [String!]
-  previousValues: RecordPreviousValues
-}
-
-input RecordSubscriptionWhereInput {
+input RecordScalarWhereInput {
   """Logical AND on all given filters."""
-  AND: [RecordSubscriptionWhereInput!]
+  AND: [RecordScalarWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [RecordSubscriptionWhereInput!]
+  OR: [RecordScalarWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [RecordSubscriptionWhereInput!]
-
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
-  mutation_in: [MutationType!]
-
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
-  updatedFields_contains: String
-
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
-  updatedFields_contains_every: [String!]
-
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
-  updatedFields_contains_some: [String!]
-  node: RecordWhereInput
-}
-
-input RecordUpdateInput {
-  status: SightingStatus
-  date: DateTime
-  dateTo: DateTime
-  count: Int
-  notes: String
-  breeding_code: String
-  observer: UserUpdateOneRequiredInput
-  species: SpeciesUpdateOneRequiredInput
-  location: LocationUpdateOneRequiredInput
-}
-
-input RecordUpdateManyMutationInput {
-  status: SightingStatus
-  date: DateTime
-  dateTo: DateTime
-  count: Int
-  notes: String
-  breeding_code: String
-}
-
-input RecordWhereInput {
-  """Logical AND on all given filters."""
-  AND: [RecordWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [RecordWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [RecordWhereInput!]
+  NOT: [RecordScalarWhereInput!]
   id: ID
 
   """All values that are not equal to given value."""
@@ -767,6 +1341,46 @@ input RecordWhereInput {
 
   """All values that are not contained in given list."""
   status_not_in: [SightingStatus!]
+  legacyObserver: String
+
+  """All values that are not equal to given value."""
+  legacyObserver_not: String
+
+  """All values that are contained in given list."""
+  legacyObserver_in: [String!]
+
+  """All values that are not contained in given list."""
+  legacyObserver_not_in: [String!]
+
+  """All values less than the given value."""
+  legacyObserver_lt: String
+
+  """All values less than or equal the given value."""
+  legacyObserver_lte: String
+
+  """All values greater than the given value."""
+  legacyObserver_gt: String
+
+  """All values greater than or equal the given value."""
+  legacyObserver_gte: String
+
+  """All values containing the given string."""
+  legacyObserver_contains: String
+
+  """All values not containing the given string."""
+  legacyObserver_not_contains: String
+
+  """All values starting with the given string."""
+  legacyObserver_starts_with: String
+
+  """All values not starting with the given string."""
+  legacyObserver_not_starts_with: String
+
+  """All values ending with the given string."""
+  legacyObserver_ends_with: String
+
+  """All values not ending with the given string."""
+  legacyObserver_not_ends_with: String
   date: DateTime
 
   """All values that are not equal to given value."""
@@ -811,6 +1425,86 @@ input RecordWhereInput {
 
   """All values greater than or equal the given value."""
   dateTo_gte: DateTime
+  startTime: String
+
+  """All values that are not equal to given value."""
+  startTime_not: String
+
+  """All values that are contained in given list."""
+  startTime_in: [String!]
+
+  """All values that are not contained in given list."""
+  startTime_not_in: [String!]
+
+  """All values less than the given value."""
+  startTime_lt: String
+
+  """All values less than or equal the given value."""
+  startTime_lte: String
+
+  """All values greater than the given value."""
+  startTime_gt: String
+
+  """All values greater than or equal the given value."""
+  startTime_gte: String
+
+  """All values containing the given string."""
+  startTime_contains: String
+
+  """All values not containing the given string."""
+  startTime_not_contains: String
+
+  """All values starting with the given string."""
+  startTime_starts_with: String
+
+  """All values not starting with the given string."""
+  startTime_not_starts_with: String
+
+  """All values ending with the given string."""
+  startTime_ends_with: String
+
+  """All values not ending with the given string."""
+  startTime_not_ends_with: String
+  endTime: String
+
+  """All values that are not equal to given value."""
+  endTime_not: String
+
+  """All values that are contained in given list."""
+  endTime_in: [String!]
+
+  """All values that are not contained in given list."""
+  endTime_not_in: [String!]
+
+  """All values less than the given value."""
+  endTime_lt: String
+
+  """All values less than or equal the given value."""
+  endTime_lte: String
+
+  """All values greater than the given value."""
+  endTime_gt: String
+
+  """All values greater than or equal the given value."""
+  endTime_gte: String
+
+  """All values containing the given string."""
+  endTime_contains: String
+
+  """All values not containing the given string."""
+  endTime_not_contains: String
+
+  """All values starting with the given string."""
+  endTime_starts_with: String
+
+  """All values not starting with the given string."""
+  endTime_not_starts_with: String
+
+  """All values ending with the given string."""
+  endTime_ends_with: String
+
+  """All values not ending with the given string."""
+  endTime_not_ends_with: String
   count: Int
 
   """All values that are not equal to given value."""
@@ -873,49 +1567,459 @@ input RecordWhereInput {
 
   """All values not ending with the given string."""
   notes_not_ends_with: String
-  breeding_code: String
+  createdAt: DateTime
 
   """All values that are not equal to given value."""
-  breeding_code_not: String
+  createdAt_not: DateTime
 
   """All values that are contained in given list."""
-  breeding_code_in: [String!]
+  createdAt_in: [DateTime!]
 
   """All values that are not contained in given list."""
-  breeding_code_not_in: [String!]
+  createdAt_not_in: [DateTime!]
 
   """All values less than the given value."""
-  breeding_code_lt: String
+  createdAt_lt: DateTime
 
   """All values less than or equal the given value."""
-  breeding_code_lte: String
+  createdAt_lte: DateTime
 
   """All values greater than the given value."""
-  breeding_code_gt: String
+  createdAt_gt: DateTime
 
   """All values greater than or equal the given value."""
-  breeding_code_gte: String
+  createdAt_gte: DateTime
+}
+
+type RecordSubscriptionPayload {
+  mutation: MutationType!
+  node: Record
+  updatedFields: [String!]
+  previousValues: RecordPreviousValues
+}
+
+input RecordSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [RecordSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [RecordSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [RecordSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: RecordWhereInput
+}
+
+input RecordUpdateInput {
+  status: SightingStatus
+  legacyObserver: String
+  date: DateTime
+  dateTo: DateTime
+  startTime: String
+  endTime: String
+  count: Int
+  notes: String
+  author: UserUpdateOneRequiredWithoutRecordsInput
+  species: SpeciesUpdateOneRequiredInput
+  location: LocationUpdateOneRequiredInput
+  breeding_code: BreedingCodeUpdateOneInput
+}
+
+input RecordUpdateManyDataInput {
+  status: SightingStatus
+  legacyObserver: String
+  date: DateTime
+  dateTo: DateTime
+  startTime: String
+  endTime: String
+  count: Int
+  notes: String
+}
+
+input RecordUpdateManyMutationInput {
+  status: SightingStatus
+  legacyObserver: String
+  date: DateTime
+  dateTo: DateTime
+  startTime: String
+  endTime: String
+  count: Int
+  notes: String
+}
+
+input RecordUpdateManyWithoutAuthorInput {
+  create: [RecordCreateWithoutAuthorInput!]
+  connect: [RecordWhereUniqueInput!]
+  set: [RecordWhereUniqueInput!]
+  disconnect: [RecordWhereUniqueInput!]
+  delete: [RecordWhereUniqueInput!]
+  update: [RecordUpdateWithWhereUniqueWithoutAuthorInput!]
+  updateMany: [RecordUpdateManyWithWhereNestedInput!]
+  deleteMany: [RecordScalarWhereInput!]
+  upsert: [RecordUpsertWithWhereUniqueWithoutAuthorInput!]
+}
+
+input RecordUpdateManyWithWhereNestedInput {
+  where: RecordScalarWhereInput!
+  data: RecordUpdateManyDataInput!
+}
+
+input RecordUpdateWithoutAuthorDataInput {
+  status: SightingStatus
+  legacyObserver: String
+  date: DateTime
+  dateTo: DateTime
+  startTime: String
+  endTime: String
+  count: Int
+  notes: String
+  species: SpeciesUpdateOneRequiredInput
+  location: LocationUpdateOneRequiredInput
+  breeding_code: BreedingCodeUpdateOneInput
+}
+
+input RecordUpdateWithWhereUniqueWithoutAuthorInput {
+  where: RecordWhereUniqueInput!
+  data: RecordUpdateWithoutAuthorDataInput!
+}
+
+input RecordUpsertWithWhereUniqueWithoutAuthorInput {
+  where: RecordWhereUniqueInput!
+  update: RecordUpdateWithoutAuthorDataInput!
+  create: RecordCreateWithoutAuthorInput!
+}
+
+input RecordWhereInput {
+  """Logical AND on all given filters."""
+  AND: [RecordWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [RecordWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [RecordWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
 
   """All values containing the given string."""
-  breeding_code_contains: String
+  id_contains: ID
 
   """All values not containing the given string."""
-  breeding_code_not_contains: String
+  id_not_contains: ID
 
   """All values starting with the given string."""
-  breeding_code_starts_with: String
+  id_starts_with: ID
 
   """All values not starting with the given string."""
-  breeding_code_not_starts_with: String
+  id_not_starts_with: ID
 
   """All values ending with the given string."""
-  breeding_code_ends_with: String
+  id_ends_with: ID
 
   """All values not ending with the given string."""
-  breeding_code_not_ends_with: String
-  observer: UserWhereInput
+  id_not_ends_with: ID
+  status: SightingStatus
+
+  """All values that are not equal to given value."""
+  status_not: SightingStatus
+
+  """All values that are contained in given list."""
+  status_in: [SightingStatus!]
+
+  """All values that are not contained in given list."""
+  status_not_in: [SightingStatus!]
+  legacyObserver: String
+
+  """All values that are not equal to given value."""
+  legacyObserver_not: String
+
+  """All values that are contained in given list."""
+  legacyObserver_in: [String!]
+
+  """All values that are not contained in given list."""
+  legacyObserver_not_in: [String!]
+
+  """All values less than the given value."""
+  legacyObserver_lt: String
+
+  """All values less than or equal the given value."""
+  legacyObserver_lte: String
+
+  """All values greater than the given value."""
+  legacyObserver_gt: String
+
+  """All values greater than or equal the given value."""
+  legacyObserver_gte: String
+
+  """All values containing the given string."""
+  legacyObserver_contains: String
+
+  """All values not containing the given string."""
+  legacyObserver_not_contains: String
+
+  """All values starting with the given string."""
+  legacyObserver_starts_with: String
+
+  """All values not starting with the given string."""
+  legacyObserver_not_starts_with: String
+
+  """All values ending with the given string."""
+  legacyObserver_ends_with: String
+
+  """All values not ending with the given string."""
+  legacyObserver_not_ends_with: String
+  date: DateTime
+
+  """All values that are not equal to given value."""
+  date_not: DateTime
+
+  """All values that are contained in given list."""
+  date_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  date_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  date_lt: DateTime
+
+  """All values less than or equal the given value."""
+  date_lte: DateTime
+
+  """All values greater than the given value."""
+  date_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  date_gte: DateTime
+  dateTo: DateTime
+
+  """All values that are not equal to given value."""
+  dateTo_not: DateTime
+
+  """All values that are contained in given list."""
+  dateTo_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  dateTo_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  dateTo_lt: DateTime
+
+  """All values less than or equal the given value."""
+  dateTo_lte: DateTime
+
+  """All values greater than the given value."""
+  dateTo_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  dateTo_gte: DateTime
+  startTime: String
+
+  """All values that are not equal to given value."""
+  startTime_not: String
+
+  """All values that are contained in given list."""
+  startTime_in: [String!]
+
+  """All values that are not contained in given list."""
+  startTime_not_in: [String!]
+
+  """All values less than the given value."""
+  startTime_lt: String
+
+  """All values less than or equal the given value."""
+  startTime_lte: String
+
+  """All values greater than the given value."""
+  startTime_gt: String
+
+  """All values greater than or equal the given value."""
+  startTime_gte: String
+
+  """All values containing the given string."""
+  startTime_contains: String
+
+  """All values not containing the given string."""
+  startTime_not_contains: String
+
+  """All values starting with the given string."""
+  startTime_starts_with: String
+
+  """All values not starting with the given string."""
+  startTime_not_starts_with: String
+
+  """All values ending with the given string."""
+  startTime_ends_with: String
+
+  """All values not ending with the given string."""
+  startTime_not_ends_with: String
+  endTime: String
+
+  """All values that are not equal to given value."""
+  endTime_not: String
+
+  """All values that are contained in given list."""
+  endTime_in: [String!]
+
+  """All values that are not contained in given list."""
+  endTime_not_in: [String!]
+
+  """All values less than the given value."""
+  endTime_lt: String
+
+  """All values less than or equal the given value."""
+  endTime_lte: String
+
+  """All values greater than the given value."""
+  endTime_gt: String
+
+  """All values greater than or equal the given value."""
+  endTime_gte: String
+
+  """All values containing the given string."""
+  endTime_contains: String
+
+  """All values not containing the given string."""
+  endTime_not_contains: String
+
+  """All values starting with the given string."""
+  endTime_starts_with: String
+
+  """All values not starting with the given string."""
+  endTime_not_starts_with: String
+
+  """All values ending with the given string."""
+  endTime_ends_with: String
+
+  """All values not ending with the given string."""
+  endTime_not_ends_with: String
+  count: Int
+
+  """All values that are not equal to given value."""
+  count_not: Int
+
+  """All values that are contained in given list."""
+  count_in: [Int!]
+
+  """All values that are not contained in given list."""
+  count_not_in: [Int!]
+
+  """All values less than the given value."""
+  count_lt: Int
+
+  """All values less than or equal the given value."""
+  count_lte: Int
+
+  """All values greater than the given value."""
+  count_gt: Int
+
+  """All values greater than or equal the given value."""
+  count_gte: Int
+  notes: String
+
+  """All values that are not equal to given value."""
+  notes_not: String
+
+  """All values that are contained in given list."""
+  notes_in: [String!]
+
+  """All values that are not contained in given list."""
+  notes_not_in: [String!]
+
+  """All values less than the given value."""
+  notes_lt: String
+
+  """All values less than or equal the given value."""
+  notes_lte: String
+
+  """All values greater than the given value."""
+  notes_gt: String
+
+  """All values greater than or equal the given value."""
+  notes_gte: String
+
+  """All values containing the given string."""
+  notes_contains: String
+
+  """All values not containing the given string."""
+  notes_not_contains: String
+
+  """All values starting with the given string."""
+  notes_starts_with: String
+
+  """All values not starting with the given string."""
+  notes_not_starts_with: String
+
+  """All values ending with the given string."""
+  notes_ends_with: String
+
+  """All values not ending with the given string."""
+  notes_not_ends_with: String
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  author: UserWhereInput
   species: SpeciesWhereInput
   location: LocationWhereInput
+  breeding_code: BreedingCodeWhereInput
 }
 
 input RecordWhereUniqueInput {
@@ -932,9 +2036,9 @@ enum SightingStatus {
 type Species implements Node {
   id: ID!
   name: String!
+  class: Class!
   rarity: Int
-  resident: Boolean
-  class: Class
+  status(where: SpeciesStatusWhereInput, orderBy: SpeciesStatusOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [SpeciesStatus!]
 }
 
 """A connection to a list of items."""
@@ -951,8 +2055,8 @@ input SpeciesCreateInput {
   id: ID
   name: String!
   rarity: Int
-  resident: Boolean
-  class: ClassCreateOneInput
+  class: ClassCreateOneInput!
+  status: SpeciesStatusCreateManyInput
 }
 
 input SpeciesCreateOneInput {
@@ -976,15 +2080,416 @@ enum SpeciesOrderByInput {
   name_DESC
   rarity_ASC
   rarity_DESC
-  resident_ASC
-  resident_DESC
 }
 
 type SpeciesPreviousValues {
   id: ID!
   name: String!
   rarity: Int
-  resident: Boolean
+}
+
+type SpeciesStatus implements Node {
+  id: ID!
+  code: String!
+  description: String
+}
+
+"""A connection to a list of items."""
+type SpeciesStatusConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [SpeciesStatusEdge]!
+  aggregate: AggregateSpeciesStatus!
+}
+
+input SpeciesStatusCreateInput {
+  id: ID
+  code: String!
+  description: String
+}
+
+input SpeciesStatusCreateManyInput {
+  create: [SpeciesStatusCreateInput!]
+  connect: [SpeciesStatusWhereUniqueInput!]
+}
+
+"""An edge in a connection."""
+type SpeciesStatusEdge {
+  """The item at the end of the edge."""
+  node: SpeciesStatus!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum SpeciesStatusOrderByInput {
+  id_ASC
+  id_DESC
+  code_ASC
+  code_DESC
+  description_ASC
+  description_DESC
+}
+
+type SpeciesStatusPreviousValues {
+  id: ID!
+  code: String!
+  description: String
+}
+
+input SpeciesStatusScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [SpeciesStatusScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [SpeciesStatusScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [SpeciesStatusScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  code: String
+
+  """All values that are not equal to given value."""
+  code_not: String
+
+  """All values that are contained in given list."""
+  code_in: [String!]
+
+  """All values that are not contained in given list."""
+  code_not_in: [String!]
+
+  """All values less than the given value."""
+  code_lt: String
+
+  """All values less than or equal the given value."""
+  code_lte: String
+
+  """All values greater than the given value."""
+  code_gt: String
+
+  """All values greater than or equal the given value."""
+  code_gte: String
+
+  """All values containing the given string."""
+  code_contains: String
+
+  """All values not containing the given string."""
+  code_not_contains: String
+
+  """All values starting with the given string."""
+  code_starts_with: String
+
+  """All values not starting with the given string."""
+  code_not_starts_with: String
+
+  """All values ending with the given string."""
+  code_ends_with: String
+
+  """All values not ending with the given string."""
+  code_not_ends_with: String
+  description: String
+
+  """All values that are not equal to given value."""
+  description_not: String
+
+  """All values that are contained in given list."""
+  description_in: [String!]
+
+  """All values that are not contained in given list."""
+  description_not_in: [String!]
+
+  """All values less than the given value."""
+  description_lt: String
+
+  """All values less than or equal the given value."""
+  description_lte: String
+
+  """All values greater than the given value."""
+  description_gt: String
+
+  """All values greater than or equal the given value."""
+  description_gte: String
+
+  """All values containing the given string."""
+  description_contains: String
+
+  """All values not containing the given string."""
+  description_not_contains: String
+
+  """All values starting with the given string."""
+  description_starts_with: String
+
+  """All values not starting with the given string."""
+  description_not_starts_with: String
+
+  """All values ending with the given string."""
+  description_ends_with: String
+
+  """All values not ending with the given string."""
+  description_not_ends_with: String
+}
+
+type SpeciesStatusSubscriptionPayload {
+  mutation: MutationType!
+  node: SpeciesStatus
+  updatedFields: [String!]
+  previousValues: SpeciesStatusPreviousValues
+}
+
+input SpeciesStatusSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [SpeciesStatusSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [SpeciesStatusSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [SpeciesStatusSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: SpeciesStatusWhereInput
+}
+
+input SpeciesStatusUpdateDataInput {
+  code: String
+  description: String
+}
+
+input SpeciesStatusUpdateInput {
+  code: String
+  description: String
+}
+
+input SpeciesStatusUpdateManyDataInput {
+  code: String
+  description: String
+}
+
+input SpeciesStatusUpdateManyInput {
+  create: [SpeciesStatusCreateInput!]
+  connect: [SpeciesStatusWhereUniqueInput!]
+  set: [SpeciesStatusWhereUniqueInput!]
+  disconnect: [SpeciesStatusWhereUniqueInput!]
+  delete: [SpeciesStatusWhereUniqueInput!]
+  update: [SpeciesStatusUpdateWithWhereUniqueNestedInput!]
+  updateMany: [SpeciesStatusUpdateManyWithWhereNestedInput!]
+  deleteMany: [SpeciesStatusScalarWhereInput!]
+  upsert: [SpeciesStatusUpsertWithWhereUniqueNestedInput!]
+}
+
+input SpeciesStatusUpdateManyMutationInput {
+  code: String
+  description: String
+}
+
+input SpeciesStatusUpdateManyWithWhereNestedInput {
+  where: SpeciesStatusScalarWhereInput!
+  data: SpeciesStatusUpdateManyDataInput!
+}
+
+input SpeciesStatusUpdateWithWhereUniqueNestedInput {
+  where: SpeciesStatusWhereUniqueInput!
+  data: SpeciesStatusUpdateDataInput!
+}
+
+input SpeciesStatusUpsertWithWhereUniqueNestedInput {
+  where: SpeciesStatusWhereUniqueInput!
+  update: SpeciesStatusUpdateDataInput!
+  create: SpeciesStatusCreateInput!
+}
+
+input SpeciesStatusWhereInput {
+  """Logical AND on all given filters."""
+  AND: [SpeciesStatusWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [SpeciesStatusWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [SpeciesStatusWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  code: String
+
+  """All values that are not equal to given value."""
+  code_not: String
+
+  """All values that are contained in given list."""
+  code_in: [String!]
+
+  """All values that are not contained in given list."""
+  code_not_in: [String!]
+
+  """All values less than the given value."""
+  code_lt: String
+
+  """All values less than or equal the given value."""
+  code_lte: String
+
+  """All values greater than the given value."""
+  code_gt: String
+
+  """All values greater than or equal the given value."""
+  code_gte: String
+
+  """All values containing the given string."""
+  code_contains: String
+
+  """All values not containing the given string."""
+  code_not_contains: String
+
+  """All values starting with the given string."""
+  code_starts_with: String
+
+  """All values not starting with the given string."""
+  code_not_starts_with: String
+
+  """All values ending with the given string."""
+  code_ends_with: String
+
+  """All values not ending with the given string."""
+  code_not_ends_with: String
+  description: String
+
+  """All values that are not equal to given value."""
+  description_not: String
+
+  """All values that are contained in given list."""
+  description_in: [String!]
+
+  """All values that are not contained in given list."""
+  description_not_in: [String!]
+
+  """All values less than the given value."""
+  description_lt: String
+
+  """All values less than or equal the given value."""
+  description_lte: String
+
+  """All values greater than the given value."""
+  description_gt: String
+
+  """All values greater than or equal the given value."""
+  description_gte: String
+
+  """All values containing the given string."""
+  description_contains: String
+
+  """All values not containing the given string."""
+  description_not_contains: String
+
+  """All values starting with the given string."""
+  description_starts_with: String
+
+  """All values not starting with the given string."""
+  description_not_starts_with: String
+
+  """All values ending with the given string."""
+  description_ends_with: String
+
+  """All values not ending with the given string."""
+  description_not_ends_with: String
+}
+
+input SpeciesStatusWhereUniqueInput {
+  id: ID
 }
 
 type SpeciesSubscriptionPayload {
@@ -1029,21 +2534,20 @@ input SpeciesSubscriptionWhereInput {
 input SpeciesUpdateDataInput {
   name: String
   rarity: Int
-  resident: Boolean
-  class: ClassUpdateOneInput
+  class: ClassUpdateOneRequiredInput
+  status: SpeciesStatusUpdateManyInput
 }
 
 input SpeciesUpdateInput {
   name: String
   rarity: Int
-  resident: Boolean
-  class: ClassUpdateOneInput
+  class: ClassUpdateOneRequiredInput
+  status: SpeciesStatusUpdateManyInput
 }
 
 input SpeciesUpdateManyMutationInput {
   name: String
   rarity: Int
-  resident: Boolean
 }
 
 input SpeciesUpdateOneRequiredInput {
@@ -1169,11 +2673,10 @@ input SpeciesWhereInput {
 
   """All values greater than or equal the given value."""
   rarity_gte: Int
-  resident: Boolean
-
-  """All values that are not equal to given value."""
-  resident_not: Boolean
   class: ClassWhereInput
+  status_every: SpeciesStatusWhereInput
+  status_some: SpeciesStatusWhereInput
+  status_none: SpeciesStatusWhereInput
 }
 
 input SpeciesWhereUniqueInput {
@@ -1181,17 +2684,21 @@ input SpeciesWhereUniqueInput {
 }
 
 type Subscription {
-  record(where: RecordSubscriptionWhereInput): RecordSubscriptionPayload
-  location(where: LocationSubscriptionWhereInput): LocationSubscriptionPayload
-  class(where: ClassSubscriptionWhereInput): ClassSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  record(where: RecordSubscriptionWhereInput): RecordSubscriptionPayload
+  speciesStatus(where: SpeciesStatusSubscriptionWhereInput): SpeciesStatusSubscriptionPayload
+  breedingCode(where: BreedingCodeSubscriptionWhereInput): BreedingCodeSubscriptionPayload
+  masterSite(where: MasterSiteSubscriptionWhereInput): MasterSiteSubscriptionPayload
   species(where: SpeciesSubscriptionWhereInput): SpeciesSubscriptionPayload
+  class(where: ClassSubscriptionWhereInput): ClassSubscriptionPayload
+  location(where: LocationSubscriptionWhereInput): LocationSubscriptionPayload
 }
 
 type User implements Node {
   id: ID!
   name: String!
   email: String
+  records(where: RecordWhereInput, orderBy: RecordOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Record!]
 }
 
 """A connection to a list of items."""
@@ -1208,11 +2715,18 @@ input UserCreateInput {
   id: ID
   name: String!
   email: String
+  records: RecordCreateManyWithoutAuthorInput
 }
 
-input UserCreateOneInput {
-  create: UserCreateInput
+input UserCreateOneWithoutRecordsInput {
+  create: UserCreateWithoutRecordsInput
   connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutRecordsInput {
+  id: ID
+  name: String!
+  email: String
 }
 
 """An edge in a connection."""
@@ -1278,14 +2792,10 @@ input UserSubscriptionWhereInput {
   node: UserWhereInput
 }
 
-input UserUpdateDataInput {
-  name: String
-  email: String
-}
-
 input UserUpdateInput {
   name: String
   email: String
+  records: RecordUpdateManyWithoutAuthorInput
 }
 
 input UserUpdateManyMutationInput {
@@ -1293,16 +2803,21 @@ input UserUpdateManyMutationInput {
   email: String
 }
 
-input UserUpdateOneRequiredInput {
-  create: UserCreateInput
+input UserUpdateOneRequiredWithoutRecordsInput {
+  create: UserCreateWithoutRecordsInput
   connect: UserWhereUniqueInput
-  update: UserUpdateDataInput
-  upsert: UserUpsertNestedInput
+  update: UserUpdateWithoutRecordsDataInput
+  upsert: UserUpsertWithoutRecordsInput
 }
 
-input UserUpsertNestedInput {
-  update: UserUpdateDataInput!
-  create: UserCreateInput!
+input UserUpdateWithoutRecordsDataInput {
+  name: String
+  email: String
+}
+
+input UserUpsertWithoutRecordsInput {
+  update: UserUpdateWithoutRecordsDataInput!
+  create: UserCreateWithoutRecordsInput!
 }
 
 input UserWhereInput {
@@ -1434,6 +2949,9 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   email_not_ends_with: String
+  records_every: RecordWhereInput
+  records_some: RecordWhereInput
+  records_none: RecordWhereInput
 }
 
 input UserWhereUniqueInput {
