@@ -40,7 +40,8 @@ type Location {
   site: String!,  
   gridRef: String!
   area: String
-  masterSite: MasterSite 
+  masterSite: MasterSite
+  siteCode: String
 }
 
 type Species {  
@@ -58,7 +59,7 @@ type Record {
   legacyObserver: String
   species: Species!
   location: Location!
-  date: DateTime
+  date: DateTime!
   dateTo: DateTime
   startTime: String
   endTime: String

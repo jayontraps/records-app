@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/mr-jason-o-righelato/records-app/records
-# timestamp: Fri Apr 24 2020 15:43:49 GMT+0100 (British Summer Time)
+# timestamp: Sun Apr 26 2020 21:38:06 GMT+0100 (British Summer Time)
 
 type AggregateBreedingCode {
   count: Int!
@@ -552,6 +552,7 @@ type Location implements Node {
   gridRef: String!
   area: String
   masterSite: MasterSite
+  siteCode: String
 }
 
 """A connection to a list of items."""
@@ -569,6 +570,7 @@ input LocationCreateInput {
   site: String!
   gridRef: String!
   area: String
+  siteCode: String
   masterSite: MasterSiteCreateOneInput
 }
 
@@ -595,6 +597,8 @@ enum LocationOrderByInput {
   gridRef_DESC
   area_ASC
   area_DESC
+  siteCode_ASC
+  siteCode_DESC
 }
 
 type LocationPreviousValues {
@@ -602,6 +606,7 @@ type LocationPreviousValues {
   site: String!
   gridRef: String!
   area: String
+  siteCode: String
 }
 
 type LocationSubscriptionPayload {
@@ -647,6 +652,7 @@ input LocationUpdateDataInput {
   site: String
   gridRef: String
   area: String
+  siteCode: String
   masterSite: MasterSiteUpdateOneInput
 }
 
@@ -654,6 +660,7 @@ input LocationUpdateInput {
   site: String
   gridRef: String
   area: String
+  siteCode: String
   masterSite: MasterSiteUpdateOneInput
 }
 
@@ -661,6 +668,7 @@ input LocationUpdateManyMutationInput {
   site: String
   gridRef: String
   area: String
+  siteCode: String
 }
 
 input LocationUpdateOneRequiredInput {
@@ -844,6 +852,46 @@ input LocationWhereInput {
 
   """All values not ending with the given string."""
   area_not_ends_with: String
+  siteCode: String
+
+  """All values that are not equal to given value."""
+  siteCode_not: String
+
+  """All values that are contained in given list."""
+  siteCode_in: [String!]
+
+  """All values that are not contained in given list."""
+  siteCode_not_in: [String!]
+
+  """All values less than the given value."""
+  siteCode_lt: String
+
+  """All values less than or equal the given value."""
+  siteCode_lte: String
+
+  """All values greater than the given value."""
+  siteCode_gt: String
+
+  """All values greater than or equal the given value."""
+  siteCode_gte: String
+
+  """All values containing the given string."""
+  siteCode_contains: String
+
+  """All values not containing the given string."""
+  siteCode_not_contains: String
+
+  """All values starting with the given string."""
+  siteCode_starts_with: String
+
+  """All values not starting with the given string."""
+  siteCode_not_starts_with: String
+
+  """All values ending with the given string."""
+  siteCode_ends_with: String
+
+  """All values not ending with the given string."""
+  siteCode_not_ends_with: String
   masterSite: MasterSiteWhereInput
 }
 
@@ -1181,7 +1229,7 @@ type Record implements Node {
   legacyObserver: String
   species: Species!
   location: Location!
-  date: DateTime
+  date: DateTime!
   dateTo: DateTime
   startTime: String
   endTime: String
@@ -1205,7 +1253,7 @@ input RecordCreateInput {
   id: ID
   status: SightingStatus!
   legacyObserver: String
-  date: DateTime
+  date: DateTime!
   dateTo: DateTime
   startTime: String
   endTime: String
@@ -1226,7 +1274,7 @@ input RecordCreateWithoutAuthorInput {
   id: ID
   status: SightingStatus!
   legacyObserver: String
-  date: DateTime
+  date: DateTime!
   dateTo: DateTime
   startTime: String
   endTime: String
@@ -1273,7 +1321,7 @@ type RecordPreviousValues {
   id: ID!
   status: SightingStatus!
   legacyObserver: String
-  date: DateTime
+  date: DateTime!
   dateTo: DateTime
   startTime: String
   endTime: String

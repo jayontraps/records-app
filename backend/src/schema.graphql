@@ -1,5 +1,16 @@
 # import * from './generated/prisma.graphql'
 
+input RecordFromCSVInput {
+  species: String
+  location: String
+  dateFrom: String
+  dateTo: String
+  count: String
+  notes: String
+  breedingCode: String
+  observer: String
+}
+
 type Mutation {     
   addSpecies(
     name: String
@@ -7,6 +18,7 @@ type Mutation {
     status: [SpeciesCreateInput]
     ): Species!
   createRecord(data: RecordCreateInput!): Record!
+  createRecordFromCSV(data: RecordFromCSVInput!): Record!
   createSpecies(data: SpeciesCreateInput!): Species!
   createUser(data: UserCreateInput!): User!
   createClass(data: ClassCreateInput!): Class!
@@ -19,6 +31,7 @@ type Query {
   breedingCodes(where: BreedingCodeWhereInput): [BreedingCode]!
   users(where: UserWhereInput, orderBy: UserOrderByInput): [User]!
   records(where: RecordWhereInput, orderBy: RecordOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Record]!
+  recordsConnection(where: RecordWhereInput, orderBy: RecordOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): RecordConnection!
   species(where: SpeciesWhereUniqueInput!): Species
   allSpecies: [Species]!
   specieses(where: SpeciesWhereInput): [Species]!

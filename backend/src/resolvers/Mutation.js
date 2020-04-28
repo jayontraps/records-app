@@ -56,11 +56,11 @@ const mutations = {
     
   //   const item = await ctx.db.mutation.createRecord({
   //     data: {
-  //       species: {
-  //         connect: {
-  //           id: sp.id
-  //         }
-  //       },
+        // species: {
+        //   connect: {
+        //     id: sp.id
+        //   }
+        // },
   //       ...args,
   //       status,
   //       location,
@@ -71,6 +71,130 @@ const mutations = {
   //   return item
 
   // },
+
+  async createRecordFromCSV(parent, args, ctx, info) {    
+    console.log('args: ', args)
+    // SPECIES
+    const [species] = await ctx.db.query.specieses({
+      where: {
+        name_contains: args.data.species
+      }
+    })
+    
+    // LOCATIOM
+    const [location] = await ctx.db.query.locations({
+      where: {
+        siteCode: args.data.siteCode
+      }
+    })
+    
+    // BREEDINGCODE
+    let breeding_code = ''
+    
+    if (args.data.breedingCode) {
+      const [breedingCode] = await ctx.db.query.breedingCodes({
+        where: {
+          code: args.data.breedingCode
+        }
+      })
+
+      if (breedingCode) {
+        if (breedingCode.id !== undefined) {
+          breeding_code = {
+            connect: {
+              id: breedingCode.id
+            }
+          }
+        }
+      }      
+    }
+
+
+    // USER
+    const [activeUser] = await ctx.db.query.users({
+      where: {
+        name_contains: args.data.observer
+      }
+    })
+
+    const [user] = await ctx.db.query.users({
+      where: {
+        name_contains: 'Legacy'
+      }
+    })
+    let legacyUserId = user.id
+
+    let author = {}
+    let legacyObserver = ''
+
+    if (activeUser) {      
+      author = {        
+        connect: {
+          id: activeUser.id
+        }        
+      }
+    } else {
+      author = {        
+        connect: {
+          id: legacyUserId
+        }        
+      }
+      legacyObserver = args.data.observer
+    }
+
+
+
+
+    // console.log('speciesID: ', species.id)
+    // console.log('locationID: ', location.id)
+    // console.log('breedingCode: ', codeId)
+    // console.log('breedingCode: ', codeId)
+    // console.log('legacyUserId: ', legacyUserId)
+
+    // console.log('observer: ', args.data.observer)
+    // console.log('author: ', author)
+
+    
+
+    let data = {
+      status: "DRAFT", 
+      ...{author},
+      species: {
+        connect: {
+          id: species.id
+        }
+      },
+      location: {
+        connect: {
+          id: location.id
+        }
+      },      
+      date: args.data.dateFrom,
+      dateTo: args.data.dateTo ? args.data.dateTo : null,
+      count: args.data.count,
+      notes: args.data.notes       
+    }
+
+    if (breeding_code) {
+      data.breeding_code = breeding_code
+    }
+    if (legacyObserver) {
+      data.legacyObserver = legacyObserver
+    }
+
+    // console.log('data: ', data)
+       
+    const item = await ctx.db.mutation.createRecord({ data }, info)
+
+    return item
+
+
+
+
+    // return null
+  },
+
+
   async addSpecies(parent, args, ctx, info) {       
     // query for the types and set all new species to a bird for now
     const [bird] = await ctx.db.query.classes({
