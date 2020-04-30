@@ -84,7 +84,7 @@ const mutations = {
     // LOCATIOM
     const [location] = await ctx.db.query.locations({
       where: {
-        siteCode: args.data.siteCode
+        siteCode: args.data.location
       }
     })
     
@@ -185,12 +185,7 @@ const mutations = {
     // console.log('data: ', data)
        
     const item = await ctx.db.mutation.createRecord({ data }, info)
-
     return item
-
-
-
-
     // return null
   },
 
