@@ -1,8 +1,0 @@
-{
-  "editor.wordWrap": "on",
-  "editor.tabSize": 2,
-  "workbench.colorCustomizations": {
-    "titleBar.activeBackground": "#FF2C70",
-    "titleBar.inactiveBackground": "#FF2C70CC"
-  }
-}
