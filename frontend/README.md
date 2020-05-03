@@ -1,3 +1,0 @@
-# Species Records App
-
-frontend
