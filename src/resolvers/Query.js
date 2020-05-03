@@ -10,10 +10,9 @@ const Query = {
     locations: forwardTo('db'),
     breedingCodes: forwardTo('db'),
     async allSpecies(parent, args, ctx, info) {
-        const items = await ctx.db.query.specieses();
+        const items = await ctx.db.query.specieses().catch((e) => { console.error(e.message) });
         return items
-    },
-
+    }
 };
 
 module.exports = Query;
