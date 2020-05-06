@@ -19,6 +19,7 @@ type Mutation {
     ): Species!
   createRecord(data: RecordCreateInput!): Record!
   createRecordFromCSV(data: RecordFromCSVInput!): Record!
+  deleteRecord(where: RecordWhereUniqueInput!): Record
   createSpecies(data: SpeciesCreateInput!): Species!
   createUser(data: UserCreateInput!): User!
   createClass(data: ClassCreateInput!): Class!

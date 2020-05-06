@@ -24,7 +24,9 @@ const mutations = {
         where: {
           code: args.data.breedingCode
         }
-      }).catch((e) => { console.error(e.message) })
+      }).catch((e) => { 
+        console.error(e.message) 
+      })
 
       if (breedingCode) {
         if (breedingCode.id !== undefined) {
@@ -145,6 +147,7 @@ const mutations = {
   createSpeciesStatus: forwardTo('db'),
   createBreedingCode: forwardTo('db'),
   createRecord: forwardTo('db'),
+  deleteRecord: forwardTo('db'),
   createSpecies: forwardTo('db'),
   createLocation: forwardTo('db'),
   createClass: forwardTo('db'),
