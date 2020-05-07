@@ -59,6 +59,7 @@ type Record {
   legacyObserver: String
   species: Species!
   location: Location!
+  altLocation: String
   date: DateTime!
   dateTo: DateTime
   startTime: String
@@ -67,6 +68,7 @@ type Record {
   notes: String
   breeding_code: BreedingCode  
   createdAt: DateTime! @createdAt
+  featured: Boolean
 }
 
 
