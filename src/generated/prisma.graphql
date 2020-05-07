@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/mr-jason-o-righelato/records-app/records
-# timestamp: Sun Apr 26 2020 21:38:06 GMT+0100 (British Summer Time)
+# timestamp: Thu May 07 2020 18:48:37 GMT+0100 (British Summer Time)
 
 type AggregateBreedingCode {
   count: Int!
@@ -1229,6 +1229,7 @@ type Record implements Node {
   legacyObserver: String
   species: Species!
   location: Location!
+  altLocation: String
   date: DateTime!
   dateTo: DateTime
   startTime: String
@@ -1237,6 +1238,7 @@ type Record implements Node {
   notes: String
   breeding_code: BreedingCode
   createdAt: DateTime!
+  featured: Boolean
 }
 
 """A connection to a list of items."""
@@ -1253,12 +1255,14 @@ input RecordCreateInput {
   id: ID
   status: SightingStatus!
   legacyObserver: String
+  altLocation: String
   date: DateTime!
   dateTo: DateTime
   startTime: String
   endTime: String
   count: Int
   notes: String
+  featured: Boolean
   author: UserCreateOneWithoutRecordsInput!
   species: SpeciesCreateOneInput!
   location: LocationCreateOneInput!
@@ -1274,12 +1278,14 @@ input RecordCreateWithoutAuthorInput {
   id: ID
   status: SightingStatus!
   legacyObserver: String
+  altLocation: String
   date: DateTime!
   dateTo: DateTime
   startTime: String
   endTime: String
   count: Int
   notes: String
+  featured: Boolean
   species: SpeciesCreateOneInput!
   location: LocationCreateOneInput!
   breeding_code: BreedingCodeCreateOneInput
@@ -1301,6 +1307,8 @@ enum RecordOrderByInput {
   status_DESC
   legacyObserver_ASC
   legacyObserver_DESC
+  altLocation_ASC
+  altLocation_DESC
   date_ASC
   date_DESC
   dateTo_ASC
@@ -1315,12 +1323,15 @@ enum RecordOrderByInput {
   notes_DESC
   createdAt_ASC
   createdAt_DESC
+  featured_ASC
+  featured_DESC
 }
 
 type RecordPreviousValues {
   id: ID!
   status: SightingStatus!
   legacyObserver: String
+  altLocation: String
   date: DateTime!
   dateTo: DateTime
   startTime: String
@@ -1328,6 +1339,7 @@ type RecordPreviousValues {
   count: Int
   notes: String
   createdAt: DateTime!
+  featured: Boolean
 }
 
 input RecordScalarWhereInput {
@@ -1429,6 +1441,46 @@ input RecordScalarWhereInput {
 
   """All values not ending with the given string."""
   legacyObserver_not_ends_with: String
+  altLocation: String
+
+  """All values that are not equal to given value."""
+  altLocation_not: String
+
+  """All values that are contained in given list."""
+  altLocation_in: [String!]
+
+  """All values that are not contained in given list."""
+  altLocation_not_in: [String!]
+
+  """All values less than the given value."""
+  altLocation_lt: String
+
+  """All values less than or equal the given value."""
+  altLocation_lte: String
+
+  """All values greater than the given value."""
+  altLocation_gt: String
+
+  """All values greater than or equal the given value."""
+  altLocation_gte: String
+
+  """All values containing the given string."""
+  altLocation_contains: String
+
+  """All values not containing the given string."""
+  altLocation_not_contains: String
+
+  """All values starting with the given string."""
+  altLocation_starts_with: String
+
+  """All values not starting with the given string."""
+  altLocation_not_starts_with: String
+
+  """All values ending with the given string."""
+  altLocation_ends_with: String
+
+  """All values not ending with the given string."""
+  altLocation_not_ends_with: String
   date: DateTime
 
   """All values that are not equal to given value."""
@@ -1637,6 +1689,10 @@ input RecordScalarWhereInput {
 
   """All values greater than or equal the given value."""
   createdAt_gte: DateTime
+  featured: Boolean
+
+  """All values that are not equal to given value."""
+  featured_not: Boolean
 }
 
 type RecordSubscriptionPayload {
@@ -1681,12 +1737,14 @@ input RecordSubscriptionWhereInput {
 input RecordUpdateInput {
   status: SightingStatus
   legacyObserver: String
+  altLocation: String
   date: DateTime
   dateTo: DateTime
   startTime: String
   endTime: String
   count: Int
   notes: String
+  featured: Boolean
   author: UserUpdateOneRequiredWithoutRecordsInput
   species: SpeciesUpdateOneRequiredInput
   location: LocationUpdateOneRequiredInput
@@ -1696,23 +1754,27 @@ input RecordUpdateInput {
 input RecordUpdateManyDataInput {
   status: SightingStatus
   legacyObserver: String
+  altLocation: String
   date: DateTime
   dateTo: DateTime
   startTime: String
   endTime: String
   count: Int
   notes: String
+  featured: Boolean
 }
 
 input RecordUpdateManyMutationInput {
   status: SightingStatus
   legacyObserver: String
+  altLocation: String
   date: DateTime
   dateTo: DateTime
   startTime: String
   endTime: String
   count: Int
   notes: String
+  featured: Boolean
 }
 
 input RecordUpdateManyWithoutAuthorInput {
@@ -1735,12 +1797,14 @@ input RecordUpdateManyWithWhereNestedInput {
 input RecordUpdateWithoutAuthorDataInput {
   status: SightingStatus
   legacyObserver: String
+  altLocation: String
   date: DateTime
   dateTo: DateTime
   startTime: String
   endTime: String
   count: Int
   notes: String
+  featured: Boolean
   species: SpeciesUpdateOneRequiredInput
   location: LocationUpdateOneRequiredInput
   breeding_code: BreedingCodeUpdateOneInput
@@ -1856,6 +1920,46 @@ input RecordWhereInput {
 
   """All values not ending with the given string."""
   legacyObserver_not_ends_with: String
+  altLocation: String
+
+  """All values that are not equal to given value."""
+  altLocation_not: String
+
+  """All values that are contained in given list."""
+  altLocation_in: [String!]
+
+  """All values that are not contained in given list."""
+  altLocation_not_in: [String!]
+
+  """All values less than the given value."""
+  altLocation_lt: String
+
+  """All values less than or equal the given value."""
+  altLocation_lte: String
+
+  """All values greater than the given value."""
+  altLocation_gt: String
+
+  """All values greater than or equal the given value."""
+  altLocation_gte: String
+
+  """All values containing the given string."""
+  altLocation_contains: String
+
+  """All values not containing the given string."""
+  altLocation_not_contains: String
+
+  """All values starting with the given string."""
+  altLocation_starts_with: String
+
+  """All values not starting with the given string."""
+  altLocation_not_starts_with: String
+
+  """All values ending with the given string."""
+  altLocation_ends_with: String
+
+  """All values not ending with the given string."""
+  altLocation_not_ends_with: String
   date: DateTime
 
   """All values that are not equal to given value."""
@@ -2064,6 +2168,10 @@ input RecordWhereInput {
 
   """All values greater than or equal the given value."""
   createdAt_gte: DateTime
+  featured: Boolean
+
+  """All values that are not equal to given value."""
+  featured_not: Boolean
   author: UserWhereInput
   species: SpeciesWhereInput
   location: LocationWhereInput
