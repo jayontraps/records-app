@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/mr-jason-o-righelato/records-app/records
-# timestamp: Thu May 07 2020 18:48:37 GMT+0100 (British Summer Time)
+# timestamp: Sun May 10 2020 15:31:31 GMT+0100 (British Summer Time)
 
 type AggregateBreedingCode {
   count: Int!
@@ -1229,16 +1229,17 @@ type Record implements Node {
   legacyObserver: String
   species: Species!
   location: Location!
+  count: Int!
   altLocation: String
   date: DateTime!
   dateTo: DateTime
   startTime: String
   endTime: String
-  count: Int
   notes: String
   breeding_code: BreedingCode
   createdAt: DateTime!
   featured: Boolean
+  images: [String!]!
 }
 
 """A connection to a list of items."""
@@ -1251,18 +1252,23 @@ type RecordConnection {
   aggregate: AggregateRecord!
 }
 
+input RecordCreateimagesInput {
+  set: [String!]
+}
+
 input RecordCreateInput {
   id: ID
   status: SightingStatus!
   legacyObserver: String
+  count: Int!
   altLocation: String
   date: DateTime!
   dateTo: DateTime
   startTime: String
   endTime: String
-  count: Int
   notes: String
   featured: Boolean
+  images: RecordCreateimagesInput
   author: UserCreateOneWithoutRecordsInput!
   species: SpeciesCreateOneInput!
   location: LocationCreateOneInput!
@@ -1278,14 +1284,15 @@ input RecordCreateWithoutAuthorInput {
   id: ID
   status: SightingStatus!
   legacyObserver: String
+  count: Int!
   altLocation: String
   date: DateTime!
   dateTo: DateTime
   startTime: String
   endTime: String
-  count: Int
   notes: String
   featured: Boolean
+  images: RecordCreateimagesInput
   species: SpeciesCreateOneInput!
   location: LocationCreateOneInput!
   breeding_code: BreedingCodeCreateOneInput
@@ -1307,6 +1314,8 @@ enum RecordOrderByInput {
   status_DESC
   legacyObserver_ASC
   legacyObserver_DESC
+  count_ASC
+  count_DESC
   altLocation_ASC
   altLocation_DESC
   date_ASC
@@ -1317,8 +1326,6 @@ enum RecordOrderByInput {
   startTime_DESC
   endTime_ASC
   endTime_DESC
-  count_ASC
-  count_DESC
   notes_ASC
   notes_DESC
   createdAt_ASC
@@ -1331,15 +1338,16 @@ type RecordPreviousValues {
   id: ID!
   status: SightingStatus!
   legacyObserver: String
+  count: Int!
   altLocation: String
   date: DateTime!
   dateTo: DateTime
   startTime: String
   endTime: String
-  count: Int
   notes: String
   createdAt: DateTime!
   featured: Boolean
+  images: [String!]!
 }
 
 input RecordScalarWhereInput {
@@ -1441,6 +1449,28 @@ input RecordScalarWhereInput {
 
   """All values not ending with the given string."""
   legacyObserver_not_ends_with: String
+  count: Int
+
+  """All values that are not equal to given value."""
+  count_not: Int
+
+  """All values that are contained in given list."""
+  count_in: [Int!]
+
+  """All values that are not contained in given list."""
+  count_not_in: [Int!]
+
+  """All values less than the given value."""
+  count_lt: Int
+
+  """All values less than or equal the given value."""
+  count_lte: Int
+
+  """All values greater than the given value."""
+  count_gt: Int
+
+  """All values greater than or equal the given value."""
+  count_gte: Int
   altLocation: String
 
   """All values that are not equal to given value."""
@@ -1605,28 +1635,6 @@ input RecordScalarWhereInput {
 
   """All values not ending with the given string."""
   endTime_not_ends_with: String
-  count: Int
-
-  """All values that are not equal to given value."""
-  count_not: Int
-
-  """All values that are contained in given list."""
-  count_in: [Int!]
-
-  """All values that are not contained in given list."""
-  count_not_in: [Int!]
-
-  """All values less than the given value."""
-  count_lt: Int
-
-  """All values less than or equal the given value."""
-  count_lte: Int
-
-  """All values greater than the given value."""
-  count_gt: Int
-
-  """All values greater than or equal the given value."""
-  count_gte: Int
   notes: String
 
   """All values that are not equal to given value."""
@@ -1734,17 +1742,22 @@ input RecordSubscriptionWhereInput {
   node: RecordWhereInput
 }
 
+input RecordUpdateimagesInput {
+  set: [String!]
+}
+
 input RecordUpdateInput {
   status: SightingStatus
   legacyObserver: String
+  count: Int
   altLocation: String
   date: DateTime
   dateTo: DateTime
   startTime: String
   endTime: String
-  count: Int
   notes: String
   featured: Boolean
+  images: RecordUpdateimagesInput
   author: UserUpdateOneRequiredWithoutRecordsInput
   species: SpeciesUpdateOneRequiredInput
   location: LocationUpdateOneRequiredInput
@@ -1754,27 +1767,29 @@ input RecordUpdateInput {
 input RecordUpdateManyDataInput {
   status: SightingStatus
   legacyObserver: String
+  count: Int
   altLocation: String
   date: DateTime
   dateTo: DateTime
   startTime: String
   endTime: String
-  count: Int
   notes: String
   featured: Boolean
+  images: RecordUpdateimagesInput
 }
 
 input RecordUpdateManyMutationInput {
   status: SightingStatus
   legacyObserver: String
+  count: Int
   altLocation: String
   date: DateTime
   dateTo: DateTime
   startTime: String
   endTime: String
-  count: Int
   notes: String
   featured: Boolean
+  images: RecordUpdateimagesInput
 }
 
 input RecordUpdateManyWithoutAuthorInput {
@@ -1797,14 +1812,15 @@ input RecordUpdateManyWithWhereNestedInput {
 input RecordUpdateWithoutAuthorDataInput {
   status: SightingStatus
   legacyObserver: String
+  count: Int
   altLocation: String
   date: DateTime
   dateTo: DateTime
   startTime: String
   endTime: String
-  count: Int
   notes: String
   featured: Boolean
+  images: RecordUpdateimagesInput
   species: SpeciesUpdateOneRequiredInput
   location: LocationUpdateOneRequiredInput
   breeding_code: BreedingCodeUpdateOneInput
@@ -1920,6 +1936,28 @@ input RecordWhereInput {
 
   """All values not ending with the given string."""
   legacyObserver_not_ends_with: String
+  count: Int
+
+  """All values that are not equal to given value."""
+  count_not: Int
+
+  """All values that are contained in given list."""
+  count_in: [Int!]
+
+  """All values that are not contained in given list."""
+  count_not_in: [Int!]
+
+  """All values less than the given value."""
+  count_lt: Int
+
+  """All values less than or equal the given value."""
+  count_lte: Int
+
+  """All values greater than the given value."""
+  count_gt: Int
+
+  """All values greater than or equal the given value."""
+  count_gte: Int
   altLocation: String
 
   """All values that are not equal to given value."""
@@ -2084,28 +2122,6 @@ input RecordWhereInput {
 
   """All values not ending with the given string."""
   endTime_not_ends_with: String
-  count: Int
-
-  """All values that are not equal to given value."""
-  count_not: Int
-
-  """All values that are contained in given list."""
-  count_in: [Int!]
-
-  """All values that are not contained in given list."""
-  count_not_in: [Int!]
-
-  """All values less than the given value."""
-  count_lt: Int
-
-  """All values less than or equal the given value."""
-  count_lte: Int
-
-  """All values greater than the given value."""
-  count_gt: Int
-
-  """All values greater than or equal the given value."""
-  count_gte: Int
   notes: String
 
   """All values that are not equal to given value."""

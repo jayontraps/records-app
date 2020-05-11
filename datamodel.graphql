@@ -59,16 +59,17 @@ type Record {
   legacyObserver: String
   species: Species!
   location: Location!
+  count: Int!
   altLocation: String
   date: DateTime!
   dateTo: DateTime
   startTime: String
-  endTime: String
-  count: Int
+  endTime: String  
   notes: String
   breeding_code: BreedingCode  
   createdAt: DateTime! @createdAt
   featured: Boolean
+  images: [String!] @scalarList(strategy: RELATION)
 }
 
 
