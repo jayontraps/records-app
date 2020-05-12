@@ -54,8 +54,8 @@ type Species {
 
 type LatLng {
   id: ID! @id 
-  lat: Int!
-  lng: Int! 
+  lat: String!
+  lng: String! 
 }
 
 type Record {
@@ -76,7 +76,7 @@ type Record {
   createdAt: DateTime! @createdAt
   featured: Boolean
   images: [String!] @scalarList(strategy: RELATION)
-  latLng: LatLng
+  latlng: LatLng
 }
 
 
