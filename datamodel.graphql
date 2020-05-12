@@ -76,7 +76,7 @@ type Record {
   createdAt: DateTime! @createdAt
   featured: Boolean
   images: [String!] @scalarList(strategy: RELATION)
-  LatLng: LatLng
+  latLng: LatLng
 }
 
 
