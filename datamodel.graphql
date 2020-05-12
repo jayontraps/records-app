@@ -52,6 +52,12 @@ type Species {
   status: [SpeciesStatus!]
 }
 
+type LatLng {
+  id: ID! @id 
+  lat: Int!
+  lng: Int! 
+}
+
 type Record {
   id: ID! @id 
   status: SightingStatus!
@@ -70,6 +76,7 @@ type Record {
   createdAt: DateTime! @createdAt
   featured: Boolean
   images: [String!] @scalarList(strategy: RELATION)
+  LatLng: LatLng
 }
 
 

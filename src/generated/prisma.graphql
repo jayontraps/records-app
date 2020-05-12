@@ -1,11 +1,15 @@
 # source: https://eu1.prisma.sh/mr-jason-o-righelato/records-app/records
-# timestamp: Sun May 10 2020 15:31:31 GMT+0100 (British Summer Time)
+# timestamp: Tue May 12 2020 06:14:45 GMT+0100 (British Summer Time)
 
 type AggregateBreedingCode {
   count: Int!
 }
 
 type AggregateClass {
+  count: Int!
+}
+
+type AggregateLatLng {
   count: Int!
 }
 
@@ -545,6 +549,224 @@ input ClassWhereUniqueInput {
 }
 
 scalar DateTime
+
+type LatLng implements Node {
+  id: ID!
+  lat: Int!
+  lng: Int!
+}
+
+"""A connection to a list of items."""
+type LatLngConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [LatLngEdge]!
+  aggregate: AggregateLatLng!
+}
+
+input LatLngCreateInput {
+  id: ID
+  lat: Int!
+  lng: Int!
+}
+
+input LatLngCreateOneInput {
+  create: LatLngCreateInput
+  connect: LatLngWhereUniqueInput
+}
+
+"""An edge in a connection."""
+type LatLngEdge {
+  """The item at the end of the edge."""
+  node: LatLng!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum LatLngOrderByInput {
+  id_ASC
+  id_DESC
+  lat_ASC
+  lat_DESC
+  lng_ASC
+  lng_DESC
+}
+
+type LatLngPreviousValues {
+  id: ID!
+  lat: Int!
+  lng: Int!
+}
+
+type LatLngSubscriptionPayload {
+  mutation: MutationType!
+  node: LatLng
+  updatedFields: [String!]
+  previousValues: LatLngPreviousValues
+}
+
+input LatLngSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [LatLngSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [LatLngSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [LatLngSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: LatLngWhereInput
+}
+
+input LatLngUpdateDataInput {
+  lat: Int
+  lng: Int
+}
+
+input LatLngUpdateInput {
+  lat: Int
+  lng: Int
+}
+
+input LatLngUpdateManyMutationInput {
+  lat: Int
+  lng: Int
+}
+
+input LatLngUpdateOneInput {
+  create: LatLngCreateInput
+  connect: LatLngWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: LatLngUpdateDataInput
+  upsert: LatLngUpsertNestedInput
+}
+
+input LatLngUpsertNestedInput {
+  update: LatLngUpdateDataInput!
+  create: LatLngCreateInput!
+}
+
+input LatLngWhereInput {
+  """Logical AND on all given filters."""
+  AND: [LatLngWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [LatLngWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [LatLngWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  lat: Int
+
+  """All values that are not equal to given value."""
+  lat_not: Int
+
+  """All values that are contained in given list."""
+  lat_in: [Int!]
+
+  """All values that are not contained in given list."""
+  lat_not_in: [Int!]
+
+  """All values less than the given value."""
+  lat_lt: Int
+
+  """All values less than or equal the given value."""
+  lat_lte: Int
+
+  """All values greater than the given value."""
+  lat_gt: Int
+
+  """All values greater than or equal the given value."""
+  lat_gte: Int
+  lng: Int
+
+  """All values that are not equal to given value."""
+  lng_not: Int
+
+  """All values that are contained in given list."""
+  lng_in: [Int!]
+
+  """All values that are not contained in given list."""
+  lng_not_in: [Int!]
+
+  """All values less than the given value."""
+  lng_lt: Int
+
+  """All values less than or equal the given value."""
+  lng_lte: Int
+
+  """All values greater than the given value."""
+  lng_gt: Int
+
+  """All values greater than or equal the given value."""
+  lng_gte: Int
+}
+
+input LatLngWhereUniqueInput {
+  id: ID
+}
 
 type Location implements Node {
   id: ID!
@@ -1119,6 +1341,7 @@ type Mutation {
   createMasterSite(data: MasterSiteCreateInput!): MasterSite!
   createSpecies(data: SpeciesCreateInput!): Species!
   createClass(data: ClassCreateInput!): Class!
+  createLatLng(data: LatLngCreateInput!): LatLng!
   createLocation(data: LocationCreateInput!): Location!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateRecord(data: RecordUpdateInput!, where: RecordWhereUniqueInput!): Record
@@ -1127,6 +1350,7 @@ type Mutation {
   updateMasterSite(data: MasterSiteUpdateInput!, where: MasterSiteWhereUniqueInput!): MasterSite
   updateSpecies(data: SpeciesUpdateInput!, where: SpeciesWhereUniqueInput!): Species
   updateClass(data: ClassUpdateInput!, where: ClassWhereUniqueInput!): Class
+  updateLatLng(data: LatLngUpdateInput!, where: LatLngWhereUniqueInput!): LatLng
   updateLocation(data: LocationUpdateInput!, where: LocationWhereUniqueInput!): Location
   deleteUser(where: UserWhereUniqueInput!): User
   deleteRecord(where: RecordWhereUniqueInput!): Record
@@ -1135,6 +1359,7 @@ type Mutation {
   deleteMasterSite(where: MasterSiteWhereUniqueInput!): MasterSite
   deleteSpecies(where: SpeciesWhereUniqueInput!): Species
   deleteClass(where: ClassWhereUniqueInput!): Class
+  deleteLatLng(where: LatLngWhereUniqueInput!): LatLng
   deleteLocation(where: LocationWhereUniqueInput!): Location
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertRecord(where: RecordWhereUniqueInput!, create: RecordCreateInput!, update: RecordUpdateInput!): Record!
@@ -1143,6 +1368,7 @@ type Mutation {
   upsertMasterSite(where: MasterSiteWhereUniqueInput!, create: MasterSiteCreateInput!, update: MasterSiteUpdateInput!): MasterSite!
   upsertSpecies(where: SpeciesWhereUniqueInput!, create: SpeciesCreateInput!, update: SpeciesUpdateInput!): Species!
   upsertClass(where: ClassWhereUniqueInput!, create: ClassCreateInput!, update: ClassUpdateInput!): Class!
+  upsertLatLng(where: LatLngWhereUniqueInput!, create: LatLngCreateInput!, update: LatLngUpdateInput!): LatLng!
   upsertLocation(where: LocationWhereUniqueInput!, create: LocationCreateInput!, update: LocationUpdateInput!): Location!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
   updateManyRecords(data: RecordUpdateManyMutationInput!, where: RecordWhereInput): BatchPayload!
@@ -1151,6 +1377,7 @@ type Mutation {
   updateManyMasterSites(data: MasterSiteUpdateManyMutationInput!, where: MasterSiteWhereInput): BatchPayload!
   updateManySpecieses(data: SpeciesUpdateManyMutationInput!, where: SpeciesWhereInput): BatchPayload!
   updateManyClasses(data: ClassUpdateManyMutationInput!, where: ClassWhereInput): BatchPayload!
+  updateManyLatLngs(data: LatLngUpdateManyMutationInput!, where: LatLngWhereInput): BatchPayload!
   updateManyLocations(data: LocationUpdateManyMutationInput!, where: LocationWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyRecords(where: RecordWhereInput): BatchPayload!
@@ -1159,6 +1386,7 @@ type Mutation {
   deleteManyMasterSites(where: MasterSiteWhereInput): BatchPayload!
   deleteManySpecieses(where: SpeciesWhereInput): BatchPayload!
   deleteManyClasses(where: ClassWhereInput): BatchPayload!
+  deleteManyLatLngs(where: LatLngWhereInput): BatchPayload!
   deleteManyLocations(where: LocationWhereInput): BatchPayload!
 }
 
@@ -1197,6 +1425,7 @@ type Query {
   masterSites(where: MasterSiteWhereInput, orderBy: MasterSiteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [MasterSite]!
   specieses(where: SpeciesWhereInput, orderBy: SpeciesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Species]!
   classes(where: ClassWhereInput, orderBy: ClassOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Class]!
+  latLngs(where: LatLngWhereInput, orderBy: LatLngOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [LatLng]!
   locations(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Location]!
   user(where: UserWhereUniqueInput!): User
   record(where: RecordWhereUniqueInput!): Record
@@ -1205,6 +1434,7 @@ type Query {
   masterSite(where: MasterSiteWhereUniqueInput!): MasterSite
   species(where: SpeciesWhereUniqueInput!): Species
   class(where: ClassWhereUniqueInput!): Class
+  latLng(where: LatLngWhereUniqueInput!): LatLng
   location(where: LocationWhereUniqueInput!): Location
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   recordsConnection(where: RecordWhereInput, orderBy: RecordOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): RecordConnection!
@@ -1213,6 +1443,7 @@ type Query {
   masterSitesConnection(where: MasterSiteWhereInput, orderBy: MasterSiteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MasterSiteConnection!
   speciesesConnection(where: SpeciesWhereInput, orderBy: SpeciesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SpeciesConnection!
   classesConnection(where: ClassWhereInput, orderBy: ClassOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ClassConnection!
+  latLngsConnection(where: LatLngWhereInput, orderBy: LatLngOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LatLngConnection!
   locationsConnection(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LocationConnection!
 
   """Fetches an object given its ID"""
@@ -1240,6 +1471,7 @@ type Record implements Node {
   createdAt: DateTime!
   featured: Boolean
   images: [String!]!
+  LatLng: LatLng
 }
 
 """A connection to a list of items."""
@@ -1273,6 +1505,7 @@ input RecordCreateInput {
   species: SpeciesCreateOneInput!
   location: LocationCreateOneInput!
   breeding_code: BreedingCodeCreateOneInput
+  LatLng: LatLngCreateOneInput
 }
 
 input RecordCreateManyWithoutAuthorInput {
@@ -1296,6 +1529,7 @@ input RecordCreateWithoutAuthorInput {
   species: SpeciesCreateOneInput!
   location: LocationCreateOneInput!
   breeding_code: BreedingCodeCreateOneInput
+  LatLng: LatLngCreateOneInput
 }
 
 """An edge in a connection."""
@@ -1762,6 +1996,7 @@ input RecordUpdateInput {
   species: SpeciesUpdateOneRequiredInput
   location: LocationUpdateOneRequiredInput
   breeding_code: BreedingCodeUpdateOneInput
+  LatLng: LatLngUpdateOneInput
 }
 
 input RecordUpdateManyDataInput {
@@ -1824,6 +2059,7 @@ input RecordUpdateWithoutAuthorDataInput {
   species: SpeciesUpdateOneRequiredInput
   location: LocationUpdateOneRequiredInput
   breeding_code: BreedingCodeUpdateOneInput
+  LatLng: LatLngUpdateOneInput
 }
 
 input RecordUpdateWithWhereUniqueWithoutAuthorInput {
@@ -2192,6 +2428,7 @@ input RecordWhereInput {
   species: SpeciesWhereInput
   location: LocationWhereInput
   breeding_code: BreedingCodeWhereInput
+  LatLng: LatLngWhereInput
 }
 
 input RecordWhereUniqueInput {
@@ -2863,6 +3100,7 @@ type Subscription {
   masterSite(where: MasterSiteSubscriptionWhereInput): MasterSiteSubscriptionPayload
   species(where: SpeciesSubscriptionWhereInput): SpeciesSubscriptionPayload
   class(where: ClassSubscriptionWhereInput): ClassSubscriptionPayload
+  latLng(where: LatLngSubscriptionWhereInput): LatLngSubscriptionPayload
   location(where: LocationSubscriptionWhereInput): LocationSubscriptionPayload
 }
 
