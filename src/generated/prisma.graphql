@@ -1,11 +1,15 @@
 # source: https://eu1.prisma.sh/mr-jason-o-righelato/records-app/records
-# timestamp: Tue May 12 2020 07:09:12 GMT+0100 (British Summer Time)
+# timestamp: Tue May 12 2020 12:52:11 GMT+0100 (British Summer Time)
 
 type AggregateBreedingCode {
   count: Int!
 }
 
 type AggregateClass {
+  count: Int!
+}
+
+type AggregateImage {
   count: Int!
 }
 
@@ -549,6 +553,326 @@ input ClassWhereUniqueInput {
 }
 
 scalar DateTime
+
+type Image implements Node {
+  id: ID!
+  src: String!
+  author: User!
+}
+
+"""A connection to a list of items."""
+type ImageConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [ImageEdge]!
+  aggregate: AggregateImage!
+}
+
+input ImageCreateInput {
+  id: ID
+  src: String!
+  author: UserCreateOneInput!
+}
+
+input ImageCreateManyInput {
+  create: [ImageCreateInput!]
+  connect: [ImageWhereUniqueInput!]
+}
+
+"""An edge in a connection."""
+type ImageEdge {
+  """The item at the end of the edge."""
+  node: Image!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum ImageOrderByInput {
+  id_ASC
+  id_DESC
+  src_ASC
+  src_DESC
+}
+
+type ImagePreviousValues {
+  id: ID!
+  src: String!
+}
+
+input ImageScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ImageScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ImageScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ImageScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  src: String
+
+  """All values that are not equal to given value."""
+  src_not: String
+
+  """All values that are contained in given list."""
+  src_in: [String!]
+
+  """All values that are not contained in given list."""
+  src_not_in: [String!]
+
+  """All values less than the given value."""
+  src_lt: String
+
+  """All values less than or equal the given value."""
+  src_lte: String
+
+  """All values greater than the given value."""
+  src_gt: String
+
+  """All values greater than or equal the given value."""
+  src_gte: String
+
+  """All values containing the given string."""
+  src_contains: String
+
+  """All values not containing the given string."""
+  src_not_contains: String
+
+  """All values starting with the given string."""
+  src_starts_with: String
+
+  """All values not starting with the given string."""
+  src_not_starts_with: String
+
+  """All values ending with the given string."""
+  src_ends_with: String
+
+  """All values not ending with the given string."""
+  src_not_ends_with: String
+}
+
+type ImageSubscriptionPayload {
+  mutation: MutationType!
+  node: Image
+  updatedFields: [String!]
+  previousValues: ImagePreviousValues
+}
+
+input ImageSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ImageSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ImageSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ImageSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: ImageWhereInput
+}
+
+input ImageUpdateDataInput {
+  src: String
+  author: UserUpdateOneRequiredInput
+}
+
+input ImageUpdateInput {
+  src: String
+  author: UserUpdateOneRequiredInput
+}
+
+input ImageUpdateManyDataInput {
+  src: String
+}
+
+input ImageUpdateManyInput {
+  create: [ImageCreateInput!]
+  connect: [ImageWhereUniqueInput!]
+  set: [ImageWhereUniqueInput!]
+  disconnect: [ImageWhereUniqueInput!]
+  delete: [ImageWhereUniqueInput!]
+  update: [ImageUpdateWithWhereUniqueNestedInput!]
+  updateMany: [ImageUpdateManyWithWhereNestedInput!]
+  deleteMany: [ImageScalarWhereInput!]
+  upsert: [ImageUpsertWithWhereUniqueNestedInput!]
+}
+
+input ImageUpdateManyMutationInput {
+  src: String
+}
+
+input ImageUpdateManyWithWhereNestedInput {
+  where: ImageScalarWhereInput!
+  data: ImageUpdateManyDataInput!
+}
+
+input ImageUpdateWithWhereUniqueNestedInput {
+  where: ImageWhereUniqueInput!
+  data: ImageUpdateDataInput!
+}
+
+input ImageUpsertWithWhereUniqueNestedInput {
+  where: ImageWhereUniqueInput!
+  update: ImageUpdateDataInput!
+  create: ImageCreateInput!
+}
+
+input ImageWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ImageWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ImageWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ImageWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  src: String
+
+  """All values that are not equal to given value."""
+  src_not: String
+
+  """All values that are contained in given list."""
+  src_in: [String!]
+
+  """All values that are not contained in given list."""
+  src_not_in: [String!]
+
+  """All values less than the given value."""
+  src_lt: String
+
+  """All values less than or equal the given value."""
+  src_lte: String
+
+  """All values greater than the given value."""
+  src_gt: String
+
+  """All values greater than or equal the given value."""
+  src_gte: String
+
+  """All values containing the given string."""
+  src_contains: String
+
+  """All values not containing the given string."""
+  src_not_contains: String
+
+  """All values starting with the given string."""
+  src_starts_with: String
+
+  """All values not starting with the given string."""
+  src_not_starts_with: String
+
+  """All values ending with the given string."""
+  src_ends_with: String
+
+  """All values not ending with the given string."""
+  src_not_ends_with: String
+  author: UserWhereInput
+}
+
+input ImageWhereUniqueInput {
+  id: ID
+}
 
 type LatLng implements Node {
   id: ID!
@@ -1370,7 +1694,6 @@ input MasterSiteWhereUniqueInput {
 }
 
 type Mutation {
-  createUser(data: UserCreateInput!): User!
   createRecord(data: RecordCreateInput!): Record!
   createSpeciesStatus(data: SpeciesStatusCreateInput!): SpeciesStatus!
   createBreedingCode(data: BreedingCodeCreateInput!): BreedingCode!
@@ -1379,7 +1702,8 @@ type Mutation {
   createClass(data: ClassCreateInput!): Class!
   createLatLng(data: LatLngCreateInput!): LatLng!
   createLocation(data: LocationCreateInput!): Location!
-  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  createUser(data: UserCreateInput!): User!
+  createImage(data: ImageCreateInput!): Image!
   updateRecord(data: RecordUpdateInput!, where: RecordWhereUniqueInput!): Record
   updateSpeciesStatus(data: SpeciesStatusUpdateInput!, where: SpeciesStatusWhereUniqueInput!): SpeciesStatus
   updateBreedingCode(data: BreedingCodeUpdateInput!, where: BreedingCodeWhereUniqueInput!): BreedingCode
@@ -1388,7 +1712,8 @@ type Mutation {
   updateClass(data: ClassUpdateInput!, where: ClassWhereUniqueInput!): Class
   updateLatLng(data: LatLngUpdateInput!, where: LatLngWhereUniqueInput!): LatLng
   updateLocation(data: LocationUpdateInput!, where: LocationWhereUniqueInput!): Location
-  deleteUser(where: UserWhereUniqueInput!): User
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateImage(data: ImageUpdateInput!, where: ImageWhereUniqueInput!): Image
   deleteRecord(where: RecordWhereUniqueInput!): Record
   deleteSpeciesStatus(where: SpeciesStatusWhereUniqueInput!): SpeciesStatus
   deleteBreedingCode(where: BreedingCodeWhereUniqueInput!): BreedingCode
@@ -1397,7 +1722,8 @@ type Mutation {
   deleteClass(where: ClassWhereUniqueInput!): Class
   deleteLatLng(where: LatLngWhereUniqueInput!): LatLng
   deleteLocation(where: LocationWhereUniqueInput!): Location
-  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  deleteUser(where: UserWhereUniqueInput!): User
+  deleteImage(where: ImageWhereUniqueInput!): Image
   upsertRecord(where: RecordWhereUniqueInput!, create: RecordCreateInput!, update: RecordUpdateInput!): Record!
   upsertSpeciesStatus(where: SpeciesStatusWhereUniqueInput!, create: SpeciesStatusCreateInput!, update: SpeciesStatusUpdateInput!): SpeciesStatus!
   upsertBreedingCode(where: BreedingCodeWhereUniqueInput!, create: BreedingCodeCreateInput!, update: BreedingCodeUpdateInput!): BreedingCode!
@@ -1406,7 +1732,8 @@ type Mutation {
   upsertClass(where: ClassWhereUniqueInput!, create: ClassCreateInput!, update: ClassUpdateInput!): Class!
   upsertLatLng(where: LatLngWhereUniqueInput!, create: LatLngCreateInput!, update: LatLngUpdateInput!): LatLng!
   upsertLocation(where: LocationWhereUniqueInput!, create: LocationCreateInput!, update: LocationUpdateInput!): Location!
-  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  upsertImage(where: ImageWhereUniqueInput!, create: ImageCreateInput!, update: ImageUpdateInput!): Image!
   updateManyRecords(data: RecordUpdateManyMutationInput!, where: RecordWhereInput): BatchPayload!
   updateManySpeciesStatuses(data: SpeciesStatusUpdateManyMutationInput!, where: SpeciesStatusWhereInput): BatchPayload!
   updateManyBreedingCodes(data: BreedingCodeUpdateManyMutationInput!, where: BreedingCodeWhereInput): BatchPayload!
@@ -1415,7 +1742,8 @@ type Mutation {
   updateManyClasses(data: ClassUpdateManyMutationInput!, where: ClassWhereInput): BatchPayload!
   updateManyLatLngs(data: LatLngUpdateManyMutationInput!, where: LatLngWhereInput): BatchPayload!
   updateManyLocations(data: LocationUpdateManyMutationInput!, where: LocationWhereInput): BatchPayload!
-  deleteManyUsers(where: UserWhereInput): BatchPayload!
+  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  updateManyImages(data: ImageUpdateManyMutationInput!, where: ImageWhereInput): BatchPayload!
   deleteManyRecords(where: RecordWhereInput): BatchPayload!
   deleteManySpeciesStatuses(where: SpeciesStatusWhereInput): BatchPayload!
   deleteManyBreedingCodes(where: BreedingCodeWhereInput): BatchPayload!
@@ -1424,6 +1752,8 @@ type Mutation {
   deleteManyClasses(where: ClassWhereInput): BatchPayload!
   deleteManyLatLngs(where: LatLngWhereInput): BatchPayload!
   deleteManyLocations(where: LocationWhereInput): BatchPayload!
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
+  deleteManyImages(where: ImageWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -1454,7 +1784,6 @@ type PageInfo {
 }
 
 type Query {
-  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   records(where: RecordWhereInput, orderBy: RecordOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Record]!
   speciesStatuses(where: SpeciesStatusWhereInput, orderBy: SpeciesStatusOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [SpeciesStatus]!
   breedingCodes(where: BreedingCodeWhereInput, orderBy: BreedingCodeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [BreedingCode]!
@@ -1463,7 +1792,8 @@ type Query {
   classes(where: ClassWhereInput, orderBy: ClassOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Class]!
   latLngs(where: LatLngWhereInput, orderBy: LatLngOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [LatLng]!
   locations(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Location]!
-  user(where: UserWhereUniqueInput!): User
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  images(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Image]!
   record(where: RecordWhereUniqueInput!): Record
   speciesStatus(where: SpeciesStatusWhereUniqueInput!): SpeciesStatus
   breedingCode(where: BreedingCodeWhereUniqueInput!): BreedingCode
@@ -1472,7 +1802,8 @@ type Query {
   class(where: ClassWhereUniqueInput!): Class
   latLng(where: LatLngWhereUniqueInput!): LatLng
   location(where: LocationWhereUniqueInput!): Location
-  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  user(where: UserWhereUniqueInput!): User
+  image(where: ImageWhereUniqueInput!): Image
   recordsConnection(where: RecordWhereInput, orderBy: RecordOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): RecordConnection!
   speciesStatusesConnection(where: SpeciesStatusWhereInput, orderBy: SpeciesStatusOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SpeciesStatusConnection!
   breedingCodesConnection(where: BreedingCodeWhereInput, orderBy: BreedingCodeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BreedingCodeConnection!
@@ -1481,6 +1812,8 @@ type Query {
   classesConnection(where: ClassWhereInput, orderBy: ClassOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ClassConnection!
   latLngsConnection(where: LatLngWhereInput, orderBy: LatLngOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LatLngConnection!
   locationsConnection(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LocationConnection!
+  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  imagesConnection(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ImageConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -1506,7 +1839,7 @@ type Record implements Node {
   breeding_code: BreedingCode
   createdAt: DateTime!
   featured: Boolean
-  images: [String!]!
+  images(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Image!]
   latlng: LatLng
 }
 
@@ -1518,10 +1851,6 @@ type RecordConnection {
   """A list of edges."""
   edges: [RecordEdge]!
   aggregate: AggregateRecord!
-}
-
-input RecordCreateimagesInput {
-  set: [String!]
 }
 
 input RecordCreateInput {
@@ -1536,11 +1865,11 @@ input RecordCreateInput {
   endTime: String
   notes: String
   featured: Boolean
-  images: RecordCreateimagesInput
   author: UserCreateOneWithoutRecordsInput!
   species: SpeciesCreateOneInput!
   location: LocationCreateOneInput!
   breeding_code: BreedingCodeCreateOneInput
+  images: ImageCreateManyInput
   latlng: LatLngCreateOneInput
 }
 
@@ -1561,10 +1890,10 @@ input RecordCreateWithoutAuthorInput {
   endTime: String
   notes: String
   featured: Boolean
-  images: RecordCreateimagesInput
   species: SpeciesCreateOneInput!
   location: LocationCreateOneInput!
   breeding_code: BreedingCodeCreateOneInput
+  images: ImageCreateManyInput
   latlng: LatLngCreateOneInput
 }
 
@@ -1617,7 +1946,6 @@ type RecordPreviousValues {
   notes: String
   createdAt: DateTime!
   featured: Boolean
-  images: [String!]!
 }
 
 input RecordScalarWhereInput {
@@ -2012,10 +2340,6 @@ input RecordSubscriptionWhereInput {
   node: RecordWhereInput
 }
 
-input RecordUpdateimagesInput {
-  set: [String!]
-}
-
 input RecordUpdateInput {
   status: SightingStatus
   legacyObserver: String
@@ -2027,11 +2351,11 @@ input RecordUpdateInput {
   endTime: String
   notes: String
   featured: Boolean
-  images: RecordUpdateimagesInput
   author: UserUpdateOneRequiredWithoutRecordsInput
   species: SpeciesUpdateOneRequiredInput
   location: LocationUpdateOneRequiredInput
   breeding_code: BreedingCodeUpdateOneInput
+  images: ImageUpdateManyInput
   latlng: LatLngUpdateOneInput
 }
 
@@ -2046,7 +2370,6 @@ input RecordUpdateManyDataInput {
   endTime: String
   notes: String
   featured: Boolean
-  images: RecordUpdateimagesInput
 }
 
 input RecordUpdateManyMutationInput {
@@ -2060,7 +2383,6 @@ input RecordUpdateManyMutationInput {
   endTime: String
   notes: String
   featured: Boolean
-  images: RecordUpdateimagesInput
 }
 
 input RecordUpdateManyWithoutAuthorInput {
@@ -2091,10 +2413,10 @@ input RecordUpdateWithoutAuthorDataInput {
   endTime: String
   notes: String
   featured: Boolean
-  images: RecordUpdateimagesInput
   species: SpeciesUpdateOneRequiredInput
   location: LocationUpdateOneRequiredInput
   breeding_code: BreedingCodeUpdateOneInput
+  images: ImageUpdateManyInput
   latlng: LatLngUpdateOneInput
 }
 
@@ -2464,6 +2786,9 @@ input RecordWhereInput {
   species: SpeciesWhereInput
   location: LocationWhereInput
   breeding_code: BreedingCodeWhereInput
+  images_every: ImageWhereInput
+  images_some: ImageWhereInput
+  images_none: ImageWhereInput
   latlng: LatLngWhereInput
 }
 
@@ -3129,7 +3454,6 @@ input SpeciesWhereUniqueInput {
 }
 
 type Subscription {
-  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   record(where: RecordSubscriptionWhereInput): RecordSubscriptionPayload
   speciesStatus(where: SpeciesStatusSubscriptionWhereInput): SpeciesStatusSubscriptionPayload
   breedingCode(where: BreedingCodeSubscriptionWhereInput): BreedingCodeSubscriptionPayload
@@ -3138,6 +3462,8 @@ type Subscription {
   class(where: ClassSubscriptionWhereInput): ClassSubscriptionPayload
   latLng(where: LatLngSubscriptionWhereInput): LatLngSubscriptionPayload
   location(where: LocationSubscriptionWhereInput): LocationSubscriptionPayload
+  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  image(where: ImageSubscriptionWhereInput): ImageSubscriptionPayload
 }
 
 type User implements Node {
@@ -3162,6 +3488,11 @@ input UserCreateInput {
   name: String!
   email: String
   records: RecordCreateManyWithoutAuthorInput
+}
+
+input UserCreateOneInput {
+  create: UserCreateInput
+  connect: UserWhereUniqueInput
 }
 
 input UserCreateOneWithoutRecordsInput {
@@ -3238,6 +3569,12 @@ input UserSubscriptionWhereInput {
   node: UserWhereInput
 }
 
+input UserUpdateDataInput {
+  name: String
+  email: String
+  records: RecordUpdateManyWithoutAuthorInput
+}
+
 input UserUpdateInput {
   name: String
   email: String
@@ -3247,6 +3584,13 @@ input UserUpdateInput {
 input UserUpdateManyMutationInput {
   name: String
   email: String
+}
+
+input UserUpdateOneRequiredInput {
+  create: UserCreateInput
+  connect: UserWhereUniqueInput
+  update: UserUpdateDataInput
+  upsert: UserUpsertNestedInput
 }
 
 input UserUpdateOneRequiredWithoutRecordsInput {
@@ -3259,6 +3603,11 @@ input UserUpdateOneRequiredWithoutRecordsInput {
 input UserUpdateWithoutRecordsDataInput {
   name: String
   email: String
+}
+
+input UserUpsertNestedInput {
+  update: UserUpdateDataInput!
+  create: UserCreateInput!
 }
 
 input UserUpsertWithoutRecordsInput {

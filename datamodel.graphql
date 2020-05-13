@@ -58,6 +58,12 @@ type LatLng {
   lng: String! 
 }
 
+type Image {
+  id: ID! @id
+  src: String!
+  author: User!
+}
+
 type Record {
   id: ID! @id 
   status: SightingStatus!
@@ -75,7 +81,7 @@ type Record {
   breeding_code: BreedingCode  
   createdAt: DateTime! @createdAt
   featured: Boolean
-  images: [String!] @scalarList(strategy: RELATION)
+  images: [Image!]
   latlng: LatLng
 }
 

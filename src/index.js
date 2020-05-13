@@ -1,6 +1,7 @@
 require('dotenv').config();
 const createServer = require('./createServer');
 const db = require('./db');
+const cloudinary = require('./cloudinary')
 
 const server = createServer();
 

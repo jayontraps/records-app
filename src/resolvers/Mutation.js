@@ -1,3 +1,4 @@
+const cloudinary = require('../cloudinary')
 const { forwardTo } = require('prisma-binding');
 
 const mutations = {
@@ -144,6 +145,29 @@ const mutations = {
     return item
 
   },  
+
+  async deleteImageFromCloudinary(parent, args, ctx, info) {     
+    const [image] = await ctx.db.query.images({
+      where: {
+        src_contains: args.public_id
+      }
+    }).catch((e) => { console.error(e.message) })
+
+    if (image) {
+      const res = await ctx.db.mutation.deleteImage({
+        where: {
+          id: image.id
+        }
+      }).catch((e) => { console.error(e.message) })
+    }
+    cloudinary.uploader.destroy(args.public_id, function(error,result) {
+      console.log(result, error) });
+
+    return "deleted"
+
+  },
+
+
   createSpeciesStatus: forwardTo('db'),
   createBreedingCode: forwardTo('db'),
   createRecord: forwardTo('db'),
@@ -151,7 +175,8 @@ const mutations = {
   createSpecies: forwardTo('db'),
   createLocation: forwardTo('db'),
   createClass: forwardTo('db'),
-  createUser: forwardTo('db')
+  createUser: forwardTo('db'),  
+  deleteImage: forwardTo('db')
 }
 
 module.exports = mutations;

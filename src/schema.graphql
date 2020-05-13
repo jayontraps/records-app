@@ -17,6 +17,7 @@ type Mutation {
     rarity: Int 
     status: [SpeciesCreateInput]
     ): Species!
+  deleteImageFromCloudinary(public_id: String): String
   createRecord(data: RecordCreateInput!): Record!
   createRecordFromCSV(data: RecordFromCSVInput!): Record!
   deleteRecord(where: RecordWhereUniqueInput!): Record
@@ -26,6 +27,8 @@ type Mutation {
   createLocation(data: LocationCreateInput!): Location!
   createBreedingCode(data: BreedingCodeCreateInput!): BreedingCode!
   createSpeciesStatus(data: SpeciesStatusCreateInput!): SpeciesStatus!
+  images(where: ImageWhereInput): [Image]!
+  deleteImage(where: ImageWhereUniqueInput!): Image
 }
 
 type Query {
@@ -38,4 +41,5 @@ type Query {
   specieses(where: SpeciesWhereInput): [Species]!
   classes: [Class]!
   locations(where: LocationWhereInput): [Location]!
+  images(where: ImageWhereInput): [Image]!
 }
