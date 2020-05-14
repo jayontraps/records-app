@@ -25,7 +25,7 @@ type User {
   records: [Record!]
 }
 
-type Class {
+type Classification {
   id: ID! @id
   name: String!
 }
@@ -46,10 +46,10 @@ type Location {
 
 type Species {  
   id: ID! @id  
-  name: String!
-  class: Class!
+  name: String!  
   rarity: Int
   status: [SpeciesStatus!]
+  classification: Classification!
 }
 
 type LatLng {

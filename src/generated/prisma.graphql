@@ -1,11 +1,11 @@
 # source: https://eu1.prisma.sh/mr-jason-o-righelato/records-app/records
-# timestamp: Tue May 12 2020 12:52:11 GMT+0100 (British Summer Time)
+# timestamp: Thu May 14 2020 11:13:59 GMT+0100 (British Summer Time)
 
 type AggregateBreedingCode {
   count: Int!
 }
 
-type AggregateClass {
+type AggregateClassification {
   count: Int!
 }
 
@@ -348,68 +348,68 @@ input BreedingCodeWhereUniqueInput {
   id: ID
 }
 
-type Class implements Node {
+type Classification implements Node {
   id: ID!
   name: String!
 }
 
 """A connection to a list of items."""
-type ClassConnection {
+type ClassificationConnection {
   """Information to aid in pagination."""
   pageInfo: PageInfo!
 
   """A list of edges."""
-  edges: [ClassEdge]!
-  aggregate: AggregateClass!
+  edges: [ClassificationEdge]!
+  aggregate: AggregateClassification!
 }
 
-input ClassCreateInput {
+input ClassificationCreateInput {
   id: ID
   name: String!
 }
 
-input ClassCreateOneInput {
-  create: ClassCreateInput
-  connect: ClassWhereUniqueInput
+input ClassificationCreateOneInput {
+  create: ClassificationCreateInput
+  connect: ClassificationWhereUniqueInput
 }
 
 """An edge in a connection."""
-type ClassEdge {
+type ClassificationEdge {
   """The item at the end of the edge."""
-  node: Class!
+  node: Classification!
 
   """A cursor for use in pagination."""
   cursor: String!
 }
 
-enum ClassOrderByInput {
+enum ClassificationOrderByInput {
   id_ASC
   id_DESC
   name_ASC
   name_DESC
 }
 
-type ClassPreviousValues {
+type ClassificationPreviousValues {
   id: ID!
   name: String!
 }
 
-type ClassSubscriptionPayload {
+type ClassificationSubscriptionPayload {
   mutation: MutationType!
-  node: Class
+  node: Classification
   updatedFields: [String!]
-  previousValues: ClassPreviousValues
+  previousValues: ClassificationPreviousValues
 }
 
-input ClassSubscriptionWhereInput {
+input ClassificationSubscriptionWhereInput {
   """Logical AND on all given filters."""
-  AND: [ClassSubscriptionWhereInput!]
+  AND: [ClassificationSubscriptionWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [ClassSubscriptionWhereInput!]
+  OR: [ClassificationSubscriptionWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [ClassSubscriptionWhereInput!]
+  NOT: [ClassificationSubscriptionWhereInput!]
 
   """
   The subscription event gets dispatched when it's listed in mutation_in
@@ -430,42 +430,42 @@ input ClassSubscriptionWhereInput {
   The subscription event gets only dispatched when some of the field names included in this list have been updated
   """
   updatedFields_contains_some: [String!]
-  node: ClassWhereInput
+  node: ClassificationWhereInput
 }
 
-input ClassUpdateDataInput {
+input ClassificationUpdateDataInput {
   name: String
 }
 
-input ClassUpdateInput {
+input ClassificationUpdateInput {
   name: String
 }
 
-input ClassUpdateManyMutationInput {
+input ClassificationUpdateManyMutationInput {
   name: String
 }
 
-input ClassUpdateOneRequiredInput {
-  create: ClassCreateInput
-  connect: ClassWhereUniqueInput
-  update: ClassUpdateDataInput
-  upsert: ClassUpsertNestedInput
+input ClassificationUpdateOneRequiredInput {
+  create: ClassificationCreateInput
+  connect: ClassificationWhereUniqueInput
+  update: ClassificationUpdateDataInput
+  upsert: ClassificationUpsertNestedInput
 }
 
-input ClassUpsertNestedInput {
-  update: ClassUpdateDataInput!
-  create: ClassCreateInput!
+input ClassificationUpsertNestedInput {
+  update: ClassificationUpdateDataInput!
+  create: ClassificationCreateInput!
 }
 
-input ClassWhereInput {
+input ClassificationWhereInput {
   """Logical AND on all given filters."""
-  AND: [ClassWhereInput!]
+  AND: [ClassificationWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [ClassWhereInput!]
+  OR: [ClassificationWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [ClassWhereInput!]
+  NOT: [ClassificationWhereInput!]
   id: ID
 
   """All values that are not equal to given value."""
@@ -548,7 +548,7 @@ input ClassWhereInput {
   name_not_ends_with: String
 }
 
-input ClassWhereUniqueInput {
+input ClassificationWhereUniqueInput {
   id: ID
 }
 
@@ -1695,61 +1695,61 @@ input MasterSiteWhereUniqueInput {
 
 type Mutation {
   createRecord(data: RecordCreateInput!): Record!
+  createClassification(data: ClassificationCreateInput!): Classification!
   createSpeciesStatus(data: SpeciesStatusCreateInput!): SpeciesStatus!
   createBreedingCode(data: BreedingCodeCreateInput!): BreedingCode!
   createMasterSite(data: MasterSiteCreateInput!): MasterSite!
   createSpecies(data: SpeciesCreateInput!): Species!
-  createClass(data: ClassCreateInput!): Class!
   createLatLng(data: LatLngCreateInput!): LatLng!
   createLocation(data: LocationCreateInput!): Location!
   createUser(data: UserCreateInput!): User!
   createImage(data: ImageCreateInput!): Image!
   updateRecord(data: RecordUpdateInput!, where: RecordWhereUniqueInput!): Record
+  updateClassification(data: ClassificationUpdateInput!, where: ClassificationWhereUniqueInput!): Classification
   updateSpeciesStatus(data: SpeciesStatusUpdateInput!, where: SpeciesStatusWhereUniqueInput!): SpeciesStatus
   updateBreedingCode(data: BreedingCodeUpdateInput!, where: BreedingCodeWhereUniqueInput!): BreedingCode
   updateMasterSite(data: MasterSiteUpdateInput!, where: MasterSiteWhereUniqueInput!): MasterSite
   updateSpecies(data: SpeciesUpdateInput!, where: SpeciesWhereUniqueInput!): Species
-  updateClass(data: ClassUpdateInput!, where: ClassWhereUniqueInput!): Class
   updateLatLng(data: LatLngUpdateInput!, where: LatLngWhereUniqueInput!): LatLng
   updateLocation(data: LocationUpdateInput!, where: LocationWhereUniqueInput!): Location
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateImage(data: ImageUpdateInput!, where: ImageWhereUniqueInput!): Image
   deleteRecord(where: RecordWhereUniqueInput!): Record
+  deleteClassification(where: ClassificationWhereUniqueInput!): Classification
   deleteSpeciesStatus(where: SpeciesStatusWhereUniqueInput!): SpeciesStatus
   deleteBreedingCode(where: BreedingCodeWhereUniqueInput!): BreedingCode
   deleteMasterSite(where: MasterSiteWhereUniqueInput!): MasterSite
   deleteSpecies(where: SpeciesWhereUniqueInput!): Species
-  deleteClass(where: ClassWhereUniqueInput!): Class
   deleteLatLng(where: LatLngWhereUniqueInput!): LatLng
   deleteLocation(where: LocationWhereUniqueInput!): Location
   deleteUser(where: UserWhereUniqueInput!): User
   deleteImage(where: ImageWhereUniqueInput!): Image
   upsertRecord(where: RecordWhereUniqueInput!, create: RecordCreateInput!, update: RecordUpdateInput!): Record!
+  upsertClassification(where: ClassificationWhereUniqueInput!, create: ClassificationCreateInput!, update: ClassificationUpdateInput!): Classification!
   upsertSpeciesStatus(where: SpeciesStatusWhereUniqueInput!, create: SpeciesStatusCreateInput!, update: SpeciesStatusUpdateInput!): SpeciesStatus!
   upsertBreedingCode(where: BreedingCodeWhereUniqueInput!, create: BreedingCodeCreateInput!, update: BreedingCodeUpdateInput!): BreedingCode!
   upsertMasterSite(where: MasterSiteWhereUniqueInput!, create: MasterSiteCreateInput!, update: MasterSiteUpdateInput!): MasterSite!
   upsertSpecies(where: SpeciesWhereUniqueInput!, create: SpeciesCreateInput!, update: SpeciesUpdateInput!): Species!
-  upsertClass(where: ClassWhereUniqueInput!, create: ClassCreateInput!, update: ClassUpdateInput!): Class!
   upsertLatLng(where: LatLngWhereUniqueInput!, create: LatLngCreateInput!, update: LatLngUpdateInput!): LatLng!
   upsertLocation(where: LocationWhereUniqueInput!, create: LocationCreateInput!, update: LocationUpdateInput!): Location!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertImage(where: ImageWhereUniqueInput!, create: ImageCreateInput!, update: ImageUpdateInput!): Image!
   updateManyRecords(data: RecordUpdateManyMutationInput!, where: RecordWhereInput): BatchPayload!
+  updateManyClassifications(data: ClassificationUpdateManyMutationInput!, where: ClassificationWhereInput): BatchPayload!
   updateManySpeciesStatuses(data: SpeciesStatusUpdateManyMutationInput!, where: SpeciesStatusWhereInput): BatchPayload!
   updateManyBreedingCodes(data: BreedingCodeUpdateManyMutationInput!, where: BreedingCodeWhereInput): BatchPayload!
   updateManyMasterSites(data: MasterSiteUpdateManyMutationInput!, where: MasterSiteWhereInput): BatchPayload!
   updateManySpecieses(data: SpeciesUpdateManyMutationInput!, where: SpeciesWhereInput): BatchPayload!
-  updateManyClasses(data: ClassUpdateManyMutationInput!, where: ClassWhereInput): BatchPayload!
   updateManyLatLngs(data: LatLngUpdateManyMutationInput!, where: LatLngWhereInput): BatchPayload!
   updateManyLocations(data: LocationUpdateManyMutationInput!, where: LocationWhereInput): BatchPayload!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
   updateManyImages(data: ImageUpdateManyMutationInput!, where: ImageWhereInput): BatchPayload!
   deleteManyRecords(where: RecordWhereInput): BatchPayload!
+  deleteManyClassifications(where: ClassificationWhereInput): BatchPayload!
   deleteManySpeciesStatuses(where: SpeciesStatusWhereInput): BatchPayload!
   deleteManyBreedingCodes(where: BreedingCodeWhereInput): BatchPayload!
   deleteManyMasterSites(where: MasterSiteWhereInput): BatchPayload!
   deleteManySpecieses(where: SpeciesWhereInput): BatchPayload!
-  deleteManyClasses(where: ClassWhereInput): BatchPayload!
   deleteManyLatLngs(where: LatLngWhereInput): BatchPayload!
   deleteManyLocations(where: LocationWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
@@ -1785,31 +1785,31 @@ type PageInfo {
 
 type Query {
   records(where: RecordWhereInput, orderBy: RecordOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Record]!
+  classifications(where: ClassificationWhereInput, orderBy: ClassificationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Classification]!
   speciesStatuses(where: SpeciesStatusWhereInput, orderBy: SpeciesStatusOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [SpeciesStatus]!
   breedingCodes(where: BreedingCodeWhereInput, orderBy: BreedingCodeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [BreedingCode]!
   masterSites(where: MasterSiteWhereInput, orderBy: MasterSiteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [MasterSite]!
   specieses(where: SpeciesWhereInput, orderBy: SpeciesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Species]!
-  classes(where: ClassWhereInput, orderBy: ClassOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Class]!
   latLngs(where: LatLngWhereInput, orderBy: LatLngOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [LatLng]!
   locations(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Location]!
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   images(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Image]!
   record(where: RecordWhereUniqueInput!): Record
+  classification(where: ClassificationWhereUniqueInput!): Classification
   speciesStatus(where: SpeciesStatusWhereUniqueInput!): SpeciesStatus
   breedingCode(where: BreedingCodeWhereUniqueInput!): BreedingCode
   masterSite(where: MasterSiteWhereUniqueInput!): MasterSite
   species(where: SpeciesWhereUniqueInput!): Species
-  class(where: ClassWhereUniqueInput!): Class
   latLng(where: LatLngWhereUniqueInput!): LatLng
   location(where: LocationWhereUniqueInput!): Location
   user(where: UserWhereUniqueInput!): User
   image(where: ImageWhereUniqueInput!): Image
   recordsConnection(where: RecordWhereInput, orderBy: RecordOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): RecordConnection!
+  classificationsConnection(where: ClassificationWhereInput, orderBy: ClassificationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ClassificationConnection!
   speciesStatusesConnection(where: SpeciesStatusWhereInput, orderBy: SpeciesStatusOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SpeciesStatusConnection!
   breedingCodesConnection(where: BreedingCodeWhereInput, orderBy: BreedingCodeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BreedingCodeConnection!
   masterSitesConnection(where: MasterSiteWhereInput, orderBy: MasterSiteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MasterSiteConnection!
   speciesesConnection(where: SpeciesWhereInput, orderBy: SpeciesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SpeciesConnection!
-  classesConnection(where: ClassWhereInput, orderBy: ClassOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ClassConnection!
   latLngsConnection(where: LatLngWhereInput, orderBy: LatLngOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LatLngConnection!
   locationsConnection(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LocationConnection!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
@@ -2806,9 +2806,9 @@ enum SightingStatus {
 type Species implements Node {
   id: ID!
   name: String!
-  class: Class!
   rarity: Int
   status(where: SpeciesStatusWhereInput, orderBy: SpeciesStatusOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [SpeciesStatus!]
+  classification: Classification!
 }
 
 """A connection to a list of items."""
@@ -2825,8 +2825,8 @@ input SpeciesCreateInput {
   id: ID
   name: String!
   rarity: Int
-  class: ClassCreateOneInput!
   status: SpeciesStatusCreateManyInput
+  classification: ClassificationCreateOneInput!
 }
 
 input SpeciesCreateOneInput {
@@ -3304,15 +3304,15 @@ input SpeciesSubscriptionWhereInput {
 input SpeciesUpdateDataInput {
   name: String
   rarity: Int
-  class: ClassUpdateOneRequiredInput
   status: SpeciesStatusUpdateManyInput
+  classification: ClassificationUpdateOneRequiredInput
 }
 
 input SpeciesUpdateInput {
   name: String
   rarity: Int
-  class: ClassUpdateOneRequiredInput
   status: SpeciesStatusUpdateManyInput
+  classification: ClassificationUpdateOneRequiredInput
 }
 
 input SpeciesUpdateManyMutationInput {
@@ -3443,10 +3443,10 @@ input SpeciesWhereInput {
 
   """All values greater than or equal the given value."""
   rarity_gte: Int
-  class: ClassWhereInput
   status_every: SpeciesStatusWhereInput
   status_some: SpeciesStatusWhereInput
   status_none: SpeciesStatusWhereInput
+  classification: ClassificationWhereInput
 }
 
 input SpeciesWhereUniqueInput {
@@ -3455,11 +3455,11 @@ input SpeciesWhereUniqueInput {
 
 type Subscription {
   record(where: RecordSubscriptionWhereInput): RecordSubscriptionPayload
+  classification(where: ClassificationSubscriptionWhereInput): ClassificationSubscriptionPayload
   speciesStatus(where: SpeciesStatusSubscriptionWhereInput): SpeciesStatusSubscriptionPayload
   breedingCode(where: BreedingCodeSubscriptionWhereInput): BreedingCodeSubscriptionPayload
   masterSite(where: MasterSiteSubscriptionWhereInput): MasterSiteSubscriptionPayload
   species(where: SpeciesSubscriptionWhereInput): SpeciesSubscriptionPayload
-  class(where: ClassSubscriptionWhereInput): ClassSubscriptionPayload
   latLng(where: LatLngSubscriptionWhereInput): LatLngSubscriptionPayload
   location(where: LocationSubscriptionWhereInput): LocationSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload

@@ -16,18 +16,18 @@ type Mutation {
     name: String
     rarity: Int 
     status: [SpeciesCreateInput]
-    ): Species!
-  deleteImageFromCloudinary(public_id: String): String
+    ): Species!  
   createRecord(data: RecordCreateInput!): Record!
   createRecordFromCSV(data: RecordFromCSVInput!): Record!
   deleteRecord(where: RecordWhereUniqueInput!): Record
   createSpecies(data: SpeciesCreateInput!): Species!
   createUser(data: UserCreateInput!): User!
-  createClass(data: ClassCreateInput!): Class!
+  createClassification(data: ClassificationCreateInput!): Classification!
   createLocation(data: LocationCreateInput!): Location!
   createBreedingCode(data: BreedingCodeCreateInput!): BreedingCode!
   createSpeciesStatus(data: SpeciesStatusCreateInput!): SpeciesStatus!
   images(where: ImageWhereInput): [Image]!
+  deleteImageFromRecord(public_id: String): String
   deleteImage(where: ImageWhereUniqueInput!): Image
 }
 
@@ -39,7 +39,7 @@ type Query {
   species(where: SpeciesWhereUniqueInput!): Species
   allSpecies: [Species]!
   specieses(where: SpeciesWhereInput): [Species]!
-  classes: [Class]!
+  classifications: [Classification]!
   locations(where: LocationWhereInput): [Location]!
   images(where: ImageWhereInput): [Image]!
 }

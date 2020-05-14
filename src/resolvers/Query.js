@@ -5,7 +5,7 @@ const Query = {
     users: forwardTo('db'),
     records: forwardTo('db'),
     species: forwardTo('db'),
-    classes: forwardTo('db'),
+    classifications: forwardTo('db'),
     specieses: forwardTo('db'),
     locations: forwardTo('db'),
     breedingCodes: forwardTo('db'),

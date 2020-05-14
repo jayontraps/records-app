@@ -125,7 +125,7 @@ const mutations = {
 
   async addSpecies(parent, args, ctx, info) {       
     // query for the types and set all new species to a bird for now
-    const [bird] = await ctx.db.query.classes({
+    const [bird] = await ctx.db.query.classifications({
       where: {
         name: "bird"
       }
@@ -133,7 +133,7 @@ const mutations = {
 
     const item = await ctx.db.mutation.createSpecies({            
       data: {      
-        class: {
+        classification: {
           connect: { 
             id: bird.id 
           },
@@ -146,7 +146,7 @@ const mutations = {
 
   },  
 
-  async deleteImageFromCloudinary(parent, args, ctx, info) {     
+  async deleteImageFromRecord(parent, args, ctx, info) {     
     const [image] = await ctx.db.query.images({
       where: {
         src_contains: args.public_id
@@ -174,7 +174,7 @@ const mutations = {
   deleteRecord: forwardTo('db'),
   createSpecies: forwardTo('db'),
   createLocation: forwardTo('db'),
-  createClass: forwardTo('db'),
+  createClassification: forwardTo('db'),
   createUser: forwardTo('db'),  
   deleteImage: forwardTo('db')
 }
