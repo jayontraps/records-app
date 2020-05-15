@@ -61,6 +61,7 @@ type LatLng {
 type Image {
   id: ID! @id
   src: String!
+  public_id: String
   author: User!
 }
 

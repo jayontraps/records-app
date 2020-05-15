@@ -20,6 +20,7 @@ type Mutation {
   createRecord(data: RecordCreateInput!): Record!
   createRecordFromCSV(data: RecordFromCSVInput!): Record!
   deleteRecord(where: RecordWhereUniqueInput!): Record
+  updateRecord(data: RecordUpdateInput!, where: RecordWhereUniqueInput!): Record
   createSpecies(data: SpeciesCreateInput!): Species!
   createUser(data: UserCreateInput!): User!
   createClassification(data: ClassificationCreateInput!): Classification!
@@ -34,6 +35,7 @@ type Mutation {
 type Query {
   breedingCodes(where: BreedingCodeWhereInput): [BreedingCode]!
   users(where: UserWhereInput, orderBy: UserOrderByInput): [User]!
+  record(where: RecordWhereUniqueInput!): Record
   records(where: RecordWhereInput, orderBy: RecordOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Record]!
   recordsConnection(where: RecordWhereInput, orderBy: RecordOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): RecordConnection!
   species(where: SpeciesWhereUniqueInput!): Species

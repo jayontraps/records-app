@@ -172,6 +172,7 @@ const mutations = {
   createBreedingCode: forwardTo('db'),
   createRecord: forwardTo('db'),
   deleteRecord: forwardTo('db'),
+  updateRecord: forwardTo('db'),
   createSpecies: forwardTo('db'),
   createLocation: forwardTo('db'),
   createClassification: forwardTo('db'),
