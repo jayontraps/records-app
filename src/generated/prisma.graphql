@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/mr-jason-o-righelato/records-app/records
-# timestamp: Thu May 14 2020 11:13:59 GMT+0100 (British Summer Time)
+# timestamp: Fri May 15 2020 10:15:39 GMT+0100 (British Summer Time)
 
 type AggregateBreedingCode {
   count: Int!
@@ -557,6 +557,7 @@ scalar DateTime
 type Image implements Node {
   id: ID!
   src: String!
+  public_id: String
   author: User!
 }
 
@@ -573,6 +574,7 @@ type ImageConnection {
 input ImageCreateInput {
   id: ID
   src: String!
+  public_id: String
   author: UserCreateOneInput!
 }
 
@@ -595,11 +597,14 @@ enum ImageOrderByInput {
   id_DESC
   src_ASC
   src_DESC
+  public_id_ASC
+  public_id_DESC
 }
 
 type ImagePreviousValues {
   id: ID!
   src: String!
+  public_id: String
 }
 
 input ImageScalarWhereInput {
@@ -691,6 +696,46 @@ input ImageScalarWhereInput {
 
   """All values not ending with the given string."""
   src_not_ends_with: String
+  public_id: String
+
+  """All values that are not equal to given value."""
+  public_id_not: String
+
+  """All values that are contained in given list."""
+  public_id_in: [String!]
+
+  """All values that are not contained in given list."""
+  public_id_not_in: [String!]
+
+  """All values less than the given value."""
+  public_id_lt: String
+
+  """All values less than or equal the given value."""
+  public_id_lte: String
+
+  """All values greater than the given value."""
+  public_id_gt: String
+
+  """All values greater than or equal the given value."""
+  public_id_gte: String
+
+  """All values containing the given string."""
+  public_id_contains: String
+
+  """All values not containing the given string."""
+  public_id_not_contains: String
+
+  """All values starting with the given string."""
+  public_id_starts_with: String
+
+  """All values not starting with the given string."""
+  public_id_not_starts_with: String
+
+  """All values ending with the given string."""
+  public_id_ends_with: String
+
+  """All values not ending with the given string."""
+  public_id_not_ends_with: String
 }
 
 type ImageSubscriptionPayload {
@@ -734,16 +779,19 @@ input ImageSubscriptionWhereInput {
 
 input ImageUpdateDataInput {
   src: String
+  public_id: String
   author: UserUpdateOneRequiredInput
 }
 
 input ImageUpdateInput {
   src: String
+  public_id: String
   author: UserUpdateOneRequiredInput
 }
 
 input ImageUpdateManyDataInput {
   src: String
+  public_id: String
 }
 
 input ImageUpdateManyInput {
@@ -760,6 +808,7 @@ input ImageUpdateManyInput {
 
 input ImageUpdateManyMutationInput {
   src: String
+  public_id: String
 }
 
 input ImageUpdateManyWithWhereNestedInput {
@@ -867,6 +916,46 @@ input ImageWhereInput {
 
   """All values not ending with the given string."""
   src_not_ends_with: String
+  public_id: String
+
+  """All values that are not equal to given value."""
+  public_id_not: String
+
+  """All values that are contained in given list."""
+  public_id_in: [String!]
+
+  """All values that are not contained in given list."""
+  public_id_not_in: [String!]
+
+  """All values less than the given value."""
+  public_id_lt: String
+
+  """All values less than or equal the given value."""
+  public_id_lte: String
+
+  """All values greater than the given value."""
+  public_id_gt: String
+
+  """All values greater than or equal the given value."""
+  public_id_gte: String
+
+  """All values containing the given string."""
+  public_id_contains: String
+
+  """All values not containing the given string."""
+  public_id_not_contains: String
+
+  """All values starting with the given string."""
+  public_id_starts_with: String
+
+  """All values not starting with the given string."""
+  public_id_not_starts_with: String
+
+  """All values ending with the given string."""
+  public_id_ends_with: String
+
+  """All values not ending with the given string."""
+  public_id_not_ends_with: String
   author: UserWhereInput
 }
 
