@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/mr-jason-o-righelato/records-app/records
-# timestamp: Fri May 15 2020 10:15:39 GMT+0100 (British Summer Time)
+# timestamp: Fri May 15 2020 10:45:08 GMT+0100 (British Summer Time)
 
 type AggregateBreedingCode {
   count: Int!
@@ -558,6 +558,7 @@ type Image implements Node {
   id: ID!
   src: String!
   public_id: String
+  original_filename: String
   author: User!
 }
 
@@ -575,6 +576,7 @@ input ImageCreateInput {
   id: ID
   src: String!
   public_id: String
+  original_filename: String
   author: UserCreateOneInput!
 }
 
@@ -599,12 +601,15 @@ enum ImageOrderByInput {
   src_DESC
   public_id_ASC
   public_id_DESC
+  original_filename_ASC
+  original_filename_DESC
 }
 
 type ImagePreviousValues {
   id: ID!
   src: String!
   public_id: String
+  original_filename: String
 }
 
 input ImageScalarWhereInput {
@@ -736,6 +741,46 @@ input ImageScalarWhereInput {
 
   """All values not ending with the given string."""
   public_id_not_ends_with: String
+  original_filename: String
+
+  """All values that are not equal to given value."""
+  original_filename_not: String
+
+  """All values that are contained in given list."""
+  original_filename_in: [String!]
+
+  """All values that are not contained in given list."""
+  original_filename_not_in: [String!]
+
+  """All values less than the given value."""
+  original_filename_lt: String
+
+  """All values less than or equal the given value."""
+  original_filename_lte: String
+
+  """All values greater than the given value."""
+  original_filename_gt: String
+
+  """All values greater than or equal the given value."""
+  original_filename_gte: String
+
+  """All values containing the given string."""
+  original_filename_contains: String
+
+  """All values not containing the given string."""
+  original_filename_not_contains: String
+
+  """All values starting with the given string."""
+  original_filename_starts_with: String
+
+  """All values not starting with the given string."""
+  original_filename_not_starts_with: String
+
+  """All values ending with the given string."""
+  original_filename_ends_with: String
+
+  """All values not ending with the given string."""
+  original_filename_not_ends_with: String
 }
 
 type ImageSubscriptionPayload {
@@ -780,18 +825,21 @@ input ImageSubscriptionWhereInput {
 input ImageUpdateDataInput {
   src: String
   public_id: String
+  original_filename: String
   author: UserUpdateOneRequiredInput
 }
 
 input ImageUpdateInput {
   src: String
   public_id: String
+  original_filename: String
   author: UserUpdateOneRequiredInput
 }
 
 input ImageUpdateManyDataInput {
   src: String
   public_id: String
+  original_filename: String
 }
 
 input ImageUpdateManyInput {
@@ -809,6 +857,7 @@ input ImageUpdateManyInput {
 input ImageUpdateManyMutationInput {
   src: String
   public_id: String
+  original_filename: String
 }
 
 input ImageUpdateManyWithWhereNestedInput {
@@ -956,6 +1005,46 @@ input ImageWhereInput {
 
   """All values not ending with the given string."""
   public_id_not_ends_with: String
+  original_filename: String
+
+  """All values that are not equal to given value."""
+  original_filename_not: String
+
+  """All values that are contained in given list."""
+  original_filename_in: [String!]
+
+  """All values that are not contained in given list."""
+  original_filename_not_in: [String!]
+
+  """All values less than the given value."""
+  original_filename_lt: String
+
+  """All values less than or equal the given value."""
+  original_filename_lte: String
+
+  """All values greater than the given value."""
+  original_filename_gt: String
+
+  """All values greater than or equal the given value."""
+  original_filename_gte: String
+
+  """All values containing the given string."""
+  original_filename_contains: String
+
+  """All values not containing the given string."""
+  original_filename_not_contains: String
+
+  """All values starting with the given string."""
+  original_filename_starts_with: String
+
+  """All values not starting with the given string."""
+  original_filename_not_starts_with: String
+
+  """All values ending with the given string."""
+  original_filename_ends_with: String
+
+  """All values not ending with the given string."""
+  original_filename_not_ends_with: String
   author: UserWhereInput
 }
 
