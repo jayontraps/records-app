@@ -28,7 +28,7 @@ type Mutation {
   createBreedingCode(data: BreedingCodeCreateInput!): BreedingCode!
   createSpeciesStatus(data: SpeciesStatusCreateInput!): SpeciesStatus!
   images(where: ImageWhereInput): [Image]!
-  deleteImageFromRecord(public_id: String): String
+  deleteImageFromRecord(public_id: String): Record
   deleteImage(where: ImageWhereUniqueInput!): Image
 }
 

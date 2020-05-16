@@ -146,24 +146,50 @@ const mutations = {
 
   },  
 
-  async deleteImageFromRecord(parent, args, ctx, info) {     
+  async deleteImageFromRecord(parent, args, ctx, info) {    
+    // delete from cloudinary store
+    cloudinary.uploader.destroy(args.public_id, function(error,result) {
+      console.log(result, error) 
+    }); 
+
+    // find the image
     const [image] = await ctx.db.query.images({
       where: {
         src_contains: args.public_id
       }
-    }).catch((e) => { console.error(e.message) })
+    }, info).catch((e) => { console.error(e.message) })
 
+        
+    // find the record associated with the image
     if (image) {
+      const [record] = await ctx.db.query.records({
+        where: {
+          images_some: {
+            id: image.id
+          }
+        }
+      }, info).catch((e) => { console.error(e.message) })
+      const recordId = record.id          
+
+      // delete the image
       const res = await ctx.db.mutation.deleteImage({
         where: {
           id: image.id
         }
-      }).catch((e) => { console.error(e.message) })
-    }
-    cloudinary.uploader.destroy(args.public_id, function(error,result) {
-      console.log(result, error) });
+      }, info).catch((e) => { console.error(e.message) })
 
-    return "deleted"
+      // return the updated record
+      const newRecord = await ctx.db.query.record({
+        where: {
+          id: recordId
+        }
+      }, info).catch((e) => { console.error(e.message) })
+      
+      return newRecord
+
+    }
+
+    return null
 
   },
 
