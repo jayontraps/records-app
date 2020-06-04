@@ -1,11 +1,15 @@
 # source: https://eu1.prisma.sh/mr-jason-o-righelato/records-app/records
-# timestamp: Fri May 15 2020 10:45:08 GMT+0100 (British Summer Time)
+# timestamp: Sat May 30 2020 09:35:59 GMT+0100 (British Summer Time)
 
 type AggregateBreedingCode {
   count: Int!
 }
 
 type AggregateClassification {
+  count: Int!
+}
+
+type AggregateGroup {
   count: Int!
 }
 
@@ -553,6 +557,321 @@ input ClassificationWhereUniqueInput {
 }
 
 scalar DateTime
+
+type Group implements Node {
+  id: ID!
+  name: String!
+}
+
+"""A connection to a list of items."""
+type GroupConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [GroupEdge]!
+  aggregate: AggregateGroup!
+}
+
+input GroupCreateInput {
+  id: ID
+  name: String!
+}
+
+input GroupCreateManyInput {
+  create: [GroupCreateInput!]
+  connect: [GroupWhereUniqueInput!]
+}
+
+"""An edge in a connection."""
+type GroupEdge {
+  """The item at the end of the edge."""
+  node: Group!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum GroupOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+}
+
+type GroupPreviousValues {
+  id: ID!
+  name: String!
+}
+
+input GroupScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [GroupScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [GroupScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [GroupScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+}
+
+type GroupSubscriptionPayload {
+  mutation: MutationType!
+  node: Group
+  updatedFields: [String!]
+  previousValues: GroupPreviousValues
+}
+
+input GroupSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [GroupSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [GroupSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [GroupSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: GroupWhereInput
+}
+
+input GroupUpdateDataInput {
+  name: String
+}
+
+input GroupUpdateInput {
+  name: String
+}
+
+input GroupUpdateManyDataInput {
+  name: String
+}
+
+input GroupUpdateManyInput {
+  create: [GroupCreateInput!]
+  connect: [GroupWhereUniqueInput!]
+  set: [GroupWhereUniqueInput!]
+  disconnect: [GroupWhereUniqueInput!]
+  delete: [GroupWhereUniqueInput!]
+  update: [GroupUpdateWithWhereUniqueNestedInput!]
+  updateMany: [GroupUpdateManyWithWhereNestedInput!]
+  deleteMany: [GroupScalarWhereInput!]
+  upsert: [GroupUpsertWithWhereUniqueNestedInput!]
+}
+
+input GroupUpdateManyMutationInput {
+  name: String
+}
+
+input GroupUpdateManyWithWhereNestedInput {
+  where: GroupScalarWhereInput!
+  data: GroupUpdateManyDataInput!
+}
+
+input GroupUpdateWithWhereUniqueNestedInput {
+  where: GroupWhereUniqueInput!
+  data: GroupUpdateDataInput!
+}
+
+input GroupUpsertWithWhereUniqueNestedInput {
+  where: GroupWhereUniqueInput!
+  update: GroupUpdateDataInput!
+  create: GroupCreateInput!
+}
+
+input GroupWhereInput {
+  """Logical AND on all given filters."""
+  AND: [GroupWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [GroupWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [GroupWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+}
+
+input GroupWhereUniqueInput {
+  id: ID
+}
 
 type Image implements Node {
   id: ID!
@@ -1877,6 +2196,7 @@ type Mutation {
   createSpeciesStatus(data: SpeciesStatusCreateInput!): SpeciesStatus!
   createBreedingCode(data: BreedingCodeCreateInput!): BreedingCode!
   createMasterSite(data: MasterSiteCreateInput!): MasterSite!
+  createGroup(data: GroupCreateInput!): Group!
   createSpecies(data: SpeciesCreateInput!): Species!
   createLatLng(data: LatLngCreateInput!): LatLng!
   createLocation(data: LocationCreateInput!): Location!
@@ -1887,6 +2207,7 @@ type Mutation {
   updateSpeciesStatus(data: SpeciesStatusUpdateInput!, where: SpeciesStatusWhereUniqueInput!): SpeciesStatus
   updateBreedingCode(data: BreedingCodeUpdateInput!, where: BreedingCodeWhereUniqueInput!): BreedingCode
   updateMasterSite(data: MasterSiteUpdateInput!, where: MasterSiteWhereUniqueInput!): MasterSite
+  updateGroup(data: GroupUpdateInput!, where: GroupWhereUniqueInput!): Group
   updateSpecies(data: SpeciesUpdateInput!, where: SpeciesWhereUniqueInput!): Species
   updateLatLng(data: LatLngUpdateInput!, where: LatLngWhereUniqueInput!): LatLng
   updateLocation(data: LocationUpdateInput!, where: LocationWhereUniqueInput!): Location
@@ -1897,6 +2218,7 @@ type Mutation {
   deleteSpeciesStatus(where: SpeciesStatusWhereUniqueInput!): SpeciesStatus
   deleteBreedingCode(where: BreedingCodeWhereUniqueInput!): BreedingCode
   deleteMasterSite(where: MasterSiteWhereUniqueInput!): MasterSite
+  deleteGroup(where: GroupWhereUniqueInput!): Group
   deleteSpecies(where: SpeciesWhereUniqueInput!): Species
   deleteLatLng(where: LatLngWhereUniqueInput!): LatLng
   deleteLocation(where: LocationWhereUniqueInput!): Location
@@ -1907,6 +2229,7 @@ type Mutation {
   upsertSpeciesStatus(where: SpeciesStatusWhereUniqueInput!, create: SpeciesStatusCreateInput!, update: SpeciesStatusUpdateInput!): SpeciesStatus!
   upsertBreedingCode(where: BreedingCodeWhereUniqueInput!, create: BreedingCodeCreateInput!, update: BreedingCodeUpdateInput!): BreedingCode!
   upsertMasterSite(where: MasterSiteWhereUniqueInput!, create: MasterSiteCreateInput!, update: MasterSiteUpdateInput!): MasterSite!
+  upsertGroup(where: GroupWhereUniqueInput!, create: GroupCreateInput!, update: GroupUpdateInput!): Group!
   upsertSpecies(where: SpeciesWhereUniqueInput!, create: SpeciesCreateInput!, update: SpeciesUpdateInput!): Species!
   upsertLatLng(where: LatLngWhereUniqueInput!, create: LatLngCreateInput!, update: LatLngUpdateInput!): LatLng!
   upsertLocation(where: LocationWhereUniqueInput!, create: LocationCreateInput!, update: LocationUpdateInput!): Location!
@@ -1917,6 +2240,7 @@ type Mutation {
   updateManySpeciesStatuses(data: SpeciesStatusUpdateManyMutationInput!, where: SpeciesStatusWhereInput): BatchPayload!
   updateManyBreedingCodes(data: BreedingCodeUpdateManyMutationInput!, where: BreedingCodeWhereInput): BatchPayload!
   updateManyMasterSites(data: MasterSiteUpdateManyMutationInput!, where: MasterSiteWhereInput): BatchPayload!
+  updateManyGroups(data: GroupUpdateManyMutationInput!, where: GroupWhereInput): BatchPayload!
   updateManySpecieses(data: SpeciesUpdateManyMutationInput!, where: SpeciesWhereInput): BatchPayload!
   updateManyLatLngs(data: LatLngUpdateManyMutationInput!, where: LatLngWhereInput): BatchPayload!
   updateManyLocations(data: LocationUpdateManyMutationInput!, where: LocationWhereInput): BatchPayload!
@@ -1927,6 +2251,7 @@ type Mutation {
   deleteManySpeciesStatuses(where: SpeciesStatusWhereInput): BatchPayload!
   deleteManyBreedingCodes(where: BreedingCodeWhereInput): BatchPayload!
   deleteManyMasterSites(where: MasterSiteWhereInput): BatchPayload!
+  deleteManyGroups(where: GroupWhereInput): BatchPayload!
   deleteManySpecieses(where: SpeciesWhereInput): BatchPayload!
   deleteManyLatLngs(where: LatLngWhereInput): BatchPayload!
   deleteManyLocations(where: LocationWhereInput): BatchPayload!
@@ -1961,12 +2286,22 @@ type PageInfo {
   endCursor: String
 }
 
+enum Permission {
+  ADMIN
+  USER
+  ITEMCREATE
+  ITEMUPDATE
+  ITEMDELETE
+  PERMISSIONUPDATE
+}
+
 type Query {
   records(where: RecordWhereInput, orderBy: RecordOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Record]!
   classifications(where: ClassificationWhereInput, orderBy: ClassificationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Classification]!
   speciesStatuses(where: SpeciesStatusWhereInput, orderBy: SpeciesStatusOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [SpeciesStatus]!
   breedingCodes(where: BreedingCodeWhereInput, orderBy: BreedingCodeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [BreedingCode]!
   masterSites(where: MasterSiteWhereInput, orderBy: MasterSiteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [MasterSite]!
+  groups(where: GroupWhereInput, orderBy: GroupOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Group]!
   specieses(where: SpeciesWhereInput, orderBy: SpeciesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Species]!
   latLngs(where: LatLngWhereInput, orderBy: LatLngOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [LatLng]!
   locations(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Location]!
@@ -1977,6 +2312,7 @@ type Query {
   speciesStatus(where: SpeciesStatusWhereUniqueInput!): SpeciesStatus
   breedingCode(where: BreedingCodeWhereUniqueInput!): BreedingCode
   masterSite(where: MasterSiteWhereUniqueInput!): MasterSite
+  group(where: GroupWhereUniqueInput!): Group
   species(where: SpeciesWhereUniqueInput!): Species
   latLng(where: LatLngWhereUniqueInput!): LatLng
   location(where: LocationWhereUniqueInput!): Location
@@ -1987,6 +2323,7 @@ type Query {
   speciesStatusesConnection(where: SpeciesStatusWhereInput, orderBy: SpeciesStatusOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SpeciesStatusConnection!
   breedingCodesConnection(where: BreedingCodeWhereInput, orderBy: BreedingCodeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BreedingCodeConnection!
   masterSitesConnection(where: MasterSiteWhereInput, orderBy: MasterSiteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MasterSiteConnection!
+  groupsConnection(where: GroupWhereInput, orderBy: GroupOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): GroupConnection!
   speciesesConnection(where: SpeciesWhereInput, orderBy: SpeciesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SpeciesConnection!
   latLngsConnection(where: LatLngWhereInput, orderBy: LatLngOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LatLngConnection!
   locationsConnection(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LocationConnection!
@@ -3637,6 +3974,7 @@ type Subscription {
   speciesStatus(where: SpeciesStatusSubscriptionWhereInput): SpeciesStatusSubscriptionPayload
   breedingCode(where: BreedingCodeSubscriptionWhereInput): BreedingCodeSubscriptionPayload
   masterSite(where: MasterSiteSubscriptionWhereInput): MasterSiteSubscriptionPayload
+  group(where: GroupSubscriptionWhereInput): GroupSubscriptionPayload
   species(where: SpeciesSubscriptionWhereInput): SpeciesSubscriptionPayload
   latLng(where: LatLngSubscriptionWhereInput): LatLngSubscriptionPayload
   location(where: LocationSubscriptionWhereInput): LocationSubscriptionPayload
@@ -3647,8 +3985,13 @@ type Subscription {
 type User implements Node {
   id: ID!
   name: String!
-  email: String
+  email: String!
+  password: String!
+  resetToken: String
+  resetTokenExpiry: Float
+  permissions: [Permission!]!
   records(where: RecordWhereInput, orderBy: RecordOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Record!]
+  group(where: GroupWhereInput, orderBy: GroupOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Group!]
 }
 
 """A connection to a list of items."""
@@ -3664,8 +4007,13 @@ type UserConnection {
 input UserCreateInput {
   id: ID
   name: String!
-  email: String
+  email: String!
+  password: String!
+  resetToken: String
+  resetTokenExpiry: Float
+  permissions: UserCreatepermissionsInput
   records: RecordCreateManyWithoutAuthorInput
+  group: GroupCreateManyInput
 }
 
 input UserCreateOneInput {
@@ -3678,10 +4026,19 @@ input UserCreateOneWithoutRecordsInput {
   connect: UserWhereUniqueInput
 }
 
+input UserCreatepermissionsInput {
+  set: [Permission!]
+}
+
 input UserCreateWithoutRecordsInput {
   id: ID
   name: String!
-  email: String
+  email: String!
+  password: String!
+  resetToken: String
+  resetTokenExpiry: Float
+  permissions: UserCreatepermissionsInput
+  group: GroupCreateManyInput
 }
 
 """An edge in a connection."""
@@ -3700,12 +4057,22 @@ enum UserOrderByInput {
   name_DESC
   email_ASC
   email_DESC
+  password_ASC
+  password_DESC
+  resetToken_ASC
+  resetToken_DESC
+  resetTokenExpiry_ASC
+  resetTokenExpiry_DESC
 }
 
 type UserPreviousValues {
   id: ID!
   name: String!
-  email: String
+  email: String!
+  password: String!
+  resetToken: String
+  resetTokenExpiry: Float
+  permissions: [Permission!]!
 }
 
 type UserSubscriptionPayload {
@@ -3750,18 +4117,32 @@ input UserSubscriptionWhereInput {
 input UserUpdateDataInput {
   name: String
   email: String
+  password: String
+  resetToken: String
+  resetTokenExpiry: Float
+  permissions: UserUpdatepermissionsInput
   records: RecordUpdateManyWithoutAuthorInput
+  group: GroupUpdateManyInput
 }
 
 input UserUpdateInput {
   name: String
   email: String
+  password: String
+  resetToken: String
+  resetTokenExpiry: Float
+  permissions: UserUpdatepermissionsInput
   records: RecordUpdateManyWithoutAuthorInput
+  group: GroupUpdateManyInput
 }
 
 input UserUpdateManyMutationInput {
   name: String
   email: String
+  password: String
+  resetToken: String
+  resetTokenExpiry: Float
+  permissions: UserUpdatepermissionsInput
 }
 
 input UserUpdateOneRequiredInput {
@@ -3778,9 +4159,18 @@ input UserUpdateOneRequiredWithoutRecordsInput {
   upsert: UserUpsertWithoutRecordsInput
 }
 
+input UserUpdatepermissionsInput {
+  set: [Permission!]
+}
+
 input UserUpdateWithoutRecordsDataInput {
   name: String
   email: String
+  password: String
+  resetToken: String
+  resetTokenExpiry: Float
+  permissions: UserUpdatepermissionsInput
+  group: GroupUpdateManyInput
 }
 
 input UserUpsertNestedInput {
@@ -3922,11 +4312,117 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   email_not_ends_with: String
+  password: String
+
+  """All values that are not equal to given value."""
+  password_not: String
+
+  """All values that are contained in given list."""
+  password_in: [String!]
+
+  """All values that are not contained in given list."""
+  password_not_in: [String!]
+
+  """All values less than the given value."""
+  password_lt: String
+
+  """All values less than or equal the given value."""
+  password_lte: String
+
+  """All values greater than the given value."""
+  password_gt: String
+
+  """All values greater than or equal the given value."""
+  password_gte: String
+
+  """All values containing the given string."""
+  password_contains: String
+
+  """All values not containing the given string."""
+  password_not_contains: String
+
+  """All values starting with the given string."""
+  password_starts_with: String
+
+  """All values not starting with the given string."""
+  password_not_starts_with: String
+
+  """All values ending with the given string."""
+  password_ends_with: String
+
+  """All values not ending with the given string."""
+  password_not_ends_with: String
+  resetToken: String
+
+  """All values that are not equal to given value."""
+  resetToken_not: String
+
+  """All values that are contained in given list."""
+  resetToken_in: [String!]
+
+  """All values that are not contained in given list."""
+  resetToken_not_in: [String!]
+
+  """All values less than the given value."""
+  resetToken_lt: String
+
+  """All values less than or equal the given value."""
+  resetToken_lte: String
+
+  """All values greater than the given value."""
+  resetToken_gt: String
+
+  """All values greater than or equal the given value."""
+  resetToken_gte: String
+
+  """All values containing the given string."""
+  resetToken_contains: String
+
+  """All values not containing the given string."""
+  resetToken_not_contains: String
+
+  """All values starting with the given string."""
+  resetToken_starts_with: String
+
+  """All values not starting with the given string."""
+  resetToken_not_starts_with: String
+
+  """All values ending with the given string."""
+  resetToken_ends_with: String
+
+  """All values not ending with the given string."""
+  resetToken_not_ends_with: String
+  resetTokenExpiry: Float
+
+  """All values that are not equal to given value."""
+  resetTokenExpiry_not: Float
+
+  """All values that are contained in given list."""
+  resetTokenExpiry_in: [Float!]
+
+  """All values that are not contained in given list."""
+  resetTokenExpiry_not_in: [Float!]
+
+  """All values less than the given value."""
+  resetTokenExpiry_lt: Float
+
+  """All values less than or equal the given value."""
+  resetTokenExpiry_lte: Float
+
+  """All values greater than the given value."""
+  resetTokenExpiry_gt: Float
+
+  """All values greater than or equal the given value."""
+  resetTokenExpiry_gte: Float
   records_every: RecordWhereInput
   records_some: RecordWhereInput
   records_none: RecordWhereInput
+  group_every: GroupWhereInput
+  group_some: GroupWhereInput
+  group_none: GroupWhereInput
 }
 
 input UserWhereUniqueInput {
   id: ID
+  email: String
 }

@@ -11,12 +11,8 @@ input RecordFromCSVInput {
   observer: String
 }
 
-type Mutation {     
-  addSpecies(
-    name: String
-    rarity: Int 
-    status: [SpeciesCreateInput]
-    ): Species!  
+type Mutation {
+  addSpecies(name: String, rarity: Int, status: [SpeciesCreateInput]): Species!
   createRecord(data: RecordCreateInput!): Record!
   createRecordFromCSV(data: RecordFromCSVInput!): Record!
   deleteRecord(where: RecordWhereUniqueInput!): Record
@@ -30,14 +26,31 @@ type Mutation {
   images(where: ImageWhereInput): [Image]!
   deleteImageFromRecord(public_id: String): Record
   deleteImage(where: ImageWhereUniqueInput!): Image
+  signup(email: String!, name: String!, password: String!): User!
 }
 
 type Query {
   breedingCodes(where: BreedingCodeWhereInput): [BreedingCode]!
   users(where: UserWhereInput, orderBy: UserOrderByInput): [User]!
   record(where: RecordWhereUniqueInput!): Record
-  records(where: RecordWhereInput, orderBy: RecordOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Record]!
-  recordsConnection(where: RecordWhereInput, orderBy: RecordOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): RecordConnection!
+  records(
+    where: RecordWhereInput
+    orderBy: RecordOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Record]!
+  recordsConnection(
+    where: RecordWhereInput
+    orderBy: RecordOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): RecordConnection!
   species(where: SpeciesWhereUniqueInput!): Species
   allSpecies: [Species]!
   specieses(where: SpeciesWhereInput): [Species]!

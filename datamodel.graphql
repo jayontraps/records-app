@@ -1,3 +1,29 @@
+enum Permission {
+  ADMIN
+  USER
+  ITEMCREATE
+  ITEMUPDATE
+  ITEMDELETE
+  PERMISSIONUPDATE
+}
+
+type Group {
+  id: ID! @id
+  name: String!
+}
+
+type User {
+  id: ID! @id
+  name: String!
+  email: String! @unique
+  password: String!
+  resetToken: String
+  resetTokenExpiry: Float
+  permissions: [Permission] @scalarList(strategy: RELATION)
+  records: [Record] @scalarList(strategy: RELATION)
+  group: [Group] @scalarList(strategy: RELATION)
+}
+
 enum SightingStatus {
   DRAFT
   PUBLISHED
@@ -18,13 +44,6 @@ type SpeciesStatus {
   description: String
 }
 
-type User {
-  id: ID! @id
-  name: String!
-  email: String
-  records: [Record!]
-}
-
 type Classification {
   id: ID! @id
   name: String!
@@ -37,25 +56,25 @@ type MasterSite {
 
 type Location {
   id: ID! @id
-  site: String!,  
+  site: String!
   gridRef: String!
   area: String
   masterSite: MasterSite
   siteCode: String
 }
 
-type Species {  
-  id: ID! @id  
-  name: String!  
+type Species {
+  id: ID! @id
+  name: String!
   rarity: Int
   status: [SpeciesStatus!]
   classification: Classification!
 }
 
 type LatLng {
-  id: ID! @id 
+  id: ID! @id
   lat: String!
-  lng: String! 
+  lng: String!
 }
 
 type Image {
@@ -67,7 +86,7 @@ type Image {
 }
 
 type Record {
-  id: ID! @id 
+  id: ID! @id
   status: SightingStatus!
   author: User!
   legacyObserver: String
@@ -78,13 +97,11 @@ type Record {
   date: DateTime!
   dateTo: DateTime
   startTime: String
-  endTime: String  
+  endTime: String
   notes: String
-  breeding_code: BreedingCode  
+  breeding_code: BreedingCode
   createdAt: DateTime! @createdAt
   featured: Boolean
   images: [Image!]
   latlng: LatLng
 }
-
-
