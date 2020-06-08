@@ -11,6 +11,10 @@ input RecordFromCSVInput {
   observer: String
 }
 
+type SuccessMessage {
+  message: String
+}
+
 type Mutation {
   addSpecies(name: String, rarity: Int, status: [SpeciesCreateInput]): Species!
   createRecord(data: RecordCreateInput!): Record!
@@ -27,6 +31,8 @@ type Mutation {
   deleteImageFromRecord(public_id: String): Record
   deleteImage(where: ImageWhereUniqueInput!): Image
   signup(email: String!, name: String!, password: String!): User!
+  signin(email: String!, password: String!): User! 
+  signout: SuccessMessage
 }
 
 type Query {
@@ -57,4 +63,5 @@ type Query {
   classifications: [Classification]!
   locations(where: LocationWhereInput): [Location]!
   images(where: ImageWhereInput): [Image]!
+  me: User
 }
