@@ -53,7 +53,6 @@ const mutations = {
 
     return user;
   },
-
   async createRecordFromCSV(parent, args, ctx, info) {
     // SPECIES
     const [species] = await ctx.db.query
@@ -187,7 +186,6 @@ const mutations = {
     return item;
     // return null
   },
-
   async addSpecies(parent, args, ctx, info) {
     // query for the types and set all new species to a bird for now
     const [bird] = await ctx.db.query
@@ -220,7 +218,6 @@ const mutations = {
 
     return item;
   },
-
   async deleteImageFromRecord(parent, args, ctx, info) {
     // delete from cloudinary store
     cloudinary.uploader.destroy(args.public_id, function(error, result) {
@@ -292,10 +289,20 @@ const mutations = {
 
     return null;
   },
+  async createRecord(parent, args, ctx, info) {
+    if (!ctx.request.userId) {
+      throw new Error("You must be logged in to create records");
+    }
+    const { data } = args;
+    // if Admin user, set the admin user id here.. otherwise the current user..
+    data.author.connect.id = ctx.request.userId;
 
+    const record = await ctx.db.mutation.createRecord({ data }, info);
+
+    return record;
+  },
   createSpeciesStatus: forwardTo("db"),
   createBreedingCode: forwardTo("db"),
-  createRecord: forwardTo("db"),
   deleteRecord: forwardTo("db"),
   updateRecord: forwardTo("db"),
   createSpecies: forwardTo("db"),
