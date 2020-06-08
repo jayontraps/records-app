@@ -21,7 +21,7 @@ const mutations = {
     ctx.response.cookie("token", token, {
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 365,
-      domain: process.env.DOMAIN,
+      domain: process.env.FRONTEND_URL,
     });
     // 5. Return the user
     return user;
@@ -50,7 +50,7 @@ const mutations = {
     ctx.response.cookie("token", token, {
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 365,
-      domain: process.env.DOMAIN,
+      domain: process.env.FRONTEND_URL,
     });
 
     return user;
