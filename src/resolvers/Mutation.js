@@ -2,6 +2,7 @@ const cloudinary = require("../cloudinary");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { forwardTo } = require("prisma-binding");
+const { hasPermission } = require("../utils");
 
 const mutations = {
   async signin(parent, { email, password }, ctx, info) {
@@ -300,6 +301,35 @@ const mutations = {
     const record = await ctx.db.mutation.createRecord({ data }, info);
 
     return record;
+  },
+  async updatePermissions(parent, args, ctx, info) {
+    if (!ctx.request.userId) {
+      throw new Error("You must be logged in!");
+    }
+    const currentUser = await ctx.db.query.user(
+      {
+        where: {
+          id: ctx.request.userId,
+        },
+      },
+      info
+    );
+    // Check if they have permissions to do this
+    hasPermission(currentUser, ["ADMIN", "PERMISSIONUPDATE"]);
+
+    return ctx.db.mutation.updateUser(
+      {
+        where: {
+          id: args.userId,
+        },
+        data: {
+          permissions: {
+            set: args.permissions,
+          },
+        },
+      },
+      info
+    );
   },
   createSpeciesStatus: forwardTo("db"),
   createBreedingCode: forwardTo("db"),
