@@ -295,8 +295,12 @@ const mutations = {
       throw new Error("You must be logged in to create records");
     }
     const { data } = args;
-    // if Admin user, set the admin user id here.. otherwise the current user..
-    data.author.connect.id = ctx.request.userId;
+    // only Admin can assign records to other users
+    const isAdmin = ctx.request.user.permissions.includes("ADMIN");
+    // if not admin assign the current user as author
+    if (!isAdmin) {
+      data.author.connect.id = ctx.request.userId;
+    }
 
     const record = await ctx.db.mutation.createRecord({ data }, info);
 
@@ -334,13 +338,13 @@ const mutations = {
   async deleteRecord(parent, args, ctx, info) {
     const record = await ctx.db.query.record(args, `{ id, author { id } }`);
     const ownsRecord = record.author.id === ctx.request.userId;
-    const hasPermissions = ctx.request.user.permissions.some((permission) =>
-      ["ADMIN", "RECORDDELETE"].includes(permission)
-    );
-    if (!ownsRecord || !hasPermissions) {
-      throw new Error("You don't have permission to do that!");
+    const isAdmin = ctx.request.user.permissions.includes("ADMIN");
+
+    if (ownsRecord || isAdmin) {
+      return ctx.db.mutation.deleteRecord(args, info);
     }
-    return ctx.db.mutation.deleteRecord(args, info);
+
+    throw new Error("You don't have permission to do that!");
   },
   createSpeciesStatus: forwardTo("db"),
   createBreedingCode: forwardTo("db"),
