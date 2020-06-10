@@ -331,9 +331,19 @@ const mutations = {
       info
     );
   },
+  async deleteRecord(parent, args, ctx, info) {
+    const record = await ctx.db.query.record(args, `{ id, author { id } }`);
+    const ownsRecord = record.author.id === ctx.request.userId;
+    const hasPermissions = ctx.request.user.permissions.some((permission) =>
+      ["ADMIN", "RECORDDELETE"].includes(permission)
+    );
+    if (!ownsRecord || !hasPermissions) {
+      throw new Error("You don't have permission to do that!");
+    }
+    return ctx.db.mutation.deleteRecord(args, info);
+  },
   createSpeciesStatus: forwardTo("db"),
   createBreedingCode: forwardTo("db"),
-  deleteRecord: forwardTo("db"),
   updateRecord: forwardTo("db"),
   createSpecies: forwardTo("db"),
   createLocation: forwardTo("db"),
