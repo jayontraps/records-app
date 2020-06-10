@@ -6,6 +6,9 @@ const { hasPermission } = require("../utils");
 
 const mutations = {
   async signin(parent, { email, password }, ctx, info) {
+    if (!email || !password) {
+      throw new Error("Both email and password fields are required!");
+    }
     // 1. check if there is a user with that email
     const user = await ctx.db.query.user({ where: { email } }, info);
     if (!user) {
@@ -31,6 +34,9 @@ const mutations = {
     return { message: "Goodbye!" };
   },
   async signup(parent, args, ctx, info) {
+    if (!args.email || !args.password) {
+      throw new Error("Both email and password fields are required!");
+    }
     args.email = args.email.toLowerCase();
     const password = await bcrypt.hash(args.password, 10);
     // create the user
